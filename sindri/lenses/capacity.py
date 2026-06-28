@@ -33,8 +33,11 @@ def analyze_capacity(graph: DesignGraph, nfrs: NFRs, assumptions: list[str],
 
         if comp.type is ComponentType.RELATIONAL_DB:
             load = writes if has_cache else writes + reads
-            ceiling = cap.write_low if has_cache else min(
-                v for v in [cap.write_low, cap.read_low] if v is not None)
+            if has_cache:
+                ceiling = cap.write_low
+            else:
+                vals = [v for v in [cap.write_low, cap.read_low] if v is not None]
+                ceiling = min(vals) if vals else None
         elif comp.type is ComponentType.CACHE:
             load = reads
             ceiling = cap.read_low
@@ -42,8 +45,10 @@ def analyze_capacity(graph: DesignGraph, nfrs: NFRs, assumptions: list[str],
             load = total
             ceiling = cap.read_low
         else:  # cdn, object_store, queue: not on the modeled hot path in v1
-            load = 0.0
-            ceiling = cap.read_low
+            utilizations.append(Utilization(
+                component=comp.name, type=comp.type, load_per_sec=0.0,
+                ceiling_per_sec=None, utilization=None, estimated=False))
+            continue
 
         util = (load / ceiling) if ceiling else None
         utilizations.append(Utilization(
