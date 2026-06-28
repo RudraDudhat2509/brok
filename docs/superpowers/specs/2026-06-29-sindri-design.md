@@ -44,6 +44,29 @@ The intelligence lives in a deterministic engine, not the model. That is what ma
 
 ---
 
+## 3.1 North Star & Success Benchmarks
+
+**North star:** make it *unreal to design better systems* — a senior architect's capacity/latency/cost judgment inside the coding loop, so anyone catches the wall before they hit it. Turn "no idea if this scales" into "here's my exact bottleneck, my max users, and the one fix."
+
+**The honest precision bound:** component throughput varies 10-100x by config/hardware/schema, so precise capacity prediction is impossible and is NOT the goal. The bar is **right bottleneck + right order of magnitude**.
+
+**Success benchmarks (the acceptance bar):**
+
+| Benchmark | Target | Proves |
+|-----------|--------|--------|
+| Bottleneck accuracy (golden set) | correct weakest-link in **≥ 80%** | it's right about *where* you break |
+| Capacity order-of-magnitude | within **2x in ≥ 80%**, **0** cases off by 100x | honest precision, no catastrophic misses |
+| Citeability | **100%** of emitted numbers trace to a KB entry + source | the "not generic" guarantee |
+| Abstention | **100%** on out-of-coverage components; **0** fabricated numbers | never bluffs (Receipts lesson) |
+| False-alarm on healthy designs | **~0%** scary roasts on legitimately-fine small projects | doesn't cry wolf |
+| Determinism | identical verdict across runs (same input) | the engine is code, not vibes |
+| Never-breaks | completes with no model + on unparseable input, **0 crashes** | reliability is the product |
+| Speed | **< 1s** deterministic, **< 5s** with local roast | usable in the loop |
+
+The first two are the "is it real" benchmarks; the rest are the "is it trustworthy" benchmarks. These are the acceptance criteria, wired into the golden-set tests (§10).
+
+---
+
 ## 4. Architecture — the wrapper-killer engine
 
 One principle: **the LLM never reasons about systems. Deterministic code does. The model only (a) glues unstructured prose into the graph and (b) phrases findings in the roast voice.**
