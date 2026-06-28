@@ -44,3 +44,19 @@ def test_report_has_no_em_dash():
     r = CapacityReport(bottleneck="db", max_dau=12_000, utilizations=[_util("db", 8.0)],
                        assumptions=[], confidence="high", notes=[])
     assert "—" not in render_report(r)
+
+
+def test_confidence_appears_exactly_once_with_assumptions_and_overload():
+    r = CapacityReport(bottleneck="db", max_dau=12_000,
+                       utilizations=[_util("db", 2.5)],
+                       assumptions=["Assumed 100,000 daily active users."],
+                       confidence="low", notes=[])
+    assert render_report(r).count("Confidence:") == 1
+
+
+def test_confidence_appears_exactly_once_with_no_assumptions():
+    r = CapacityReport(bottleneck="db", max_dau=12_000,
+                       utilizations=[_util("db", 2.5)],
+                       assumptions=[],
+                       confidence="high", notes=[])
+    assert render_report(r).count("Confidence:") == 1

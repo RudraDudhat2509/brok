@@ -25,3 +25,11 @@ def test_capacity_report_round_trips():
                        assumptions=["assumed 100k DAU"], confidence="low", notes=[])
     assert r.bottleneck == "db"
     assert r.max_dau == 12_000
+
+
+def test_nfrs_rejects_invalid_read_write_ratio():
+    import pydantic
+    import pytest
+    with pytest.raises(pydantic.ValidationError):
+        NFRs(dau=1, requests_per_user_per_day=1, read_write_ratio=-1.0,
+             payload_kb=1.0, peak_factor=1.0)

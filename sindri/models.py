@@ -21,11 +21,11 @@ class Component(BaseModel):
 
 
 class NFRs(BaseModel):
-    dau: int
-    requests_per_user_per_day: int
-    read_write_ratio: float  # reads per write
-    payload_kb: float
-    peak_factor: float
+    dau: int = Field(ge=0)
+    requests_per_user_per_day: int = Field(ge=0)
+    read_write_ratio: float = Field(gt=-1)  # reads per write
+    payload_kb: float = Field(ge=0)
+    peak_factor: float = Field(gt=0)
 
 
 class DesignGraph(BaseModel):

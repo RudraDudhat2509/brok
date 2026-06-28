@@ -11,8 +11,8 @@ def render_report(report: CapacityReport) -> str:
     if report.assumptions:
         lines.append("Assumptions (correct me and I will re-run):")
         lines.extend(f"  {a}" for a in report.assumptions)
-        lines.append(f"Confidence: {report.confidence}.")
-        lines.append("")
+    lines.append(f"Confidence: {report.confidence}.")
+    lines.append("")
 
     bottleneck_util = None
     for u in report.utilizations:
@@ -25,11 +25,10 @@ def render_report(report: CapacityReport) -> str:
         lines.append(f"  It is about {over}x over its safe ceiling.")
         if report.max_dau is not None:
             lines.append(f"  Max capacity as designed: ~{report.max_dau:,} daily users.")
-        lines.append(f"  Confidence: {report.confidence}.")
     elif report.bottleneck and bottleneck_util is not None:
         lines.append("This design fits the assumed load.")
         if report.max_dau is not None:
-            lines.append(f"  Headroom to about ~{report.max_dau:,} daily users "
+            lines.append(f"  Headroom to ~{report.max_dau:,} daily users "
                          f"before {report.bottleneck} is the wall.")
     else:
         lines.append("Nothing estimable was found on the hot path.")
