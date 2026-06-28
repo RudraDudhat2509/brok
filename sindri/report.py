@@ -11,6 +11,7 @@ def render_report(report: CapacityReport) -> str:
     if report.assumptions:
         lines.append("Assumptions (correct me and I will re-run):")
         lines.extend(f"  {a}" for a in report.assumptions)
+        lines.append(f"Confidence: {report.confidence}.")
         lines.append("")
 
     bottleneck_util = None
