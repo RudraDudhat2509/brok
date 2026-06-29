@@ -6,6 +6,7 @@ from brok.nfr import resolve_nfrs
 from brok.parsers.compose import parse_compose
 from brok.report import render_report
 from brok.voice import render_roast
+from brok.tradeoffs import tradeoffs_for
 
 _NO_COMPONENTS_TEXT = (
     "Brok capacity review\n\n"
@@ -31,7 +32,12 @@ def build_result(graph: DesignGraph, traffic: dict | None = None) -> dict:
     resolved, assumptions = resolve_nfrs(traffic)
     confidence = "low" if assumptions else "high"
     report = analyze_capacity(graph, resolved, assumptions, confidence)
-    return {**report.model_dump(mode="json"), "report_text": render_report(report), "roast_text": render_roast(report)}
+    return {
+        **report.model_dump(mode="json"),
+        "report_text": render_report(report),
+        "roast_text": render_roast(report),
+        "tradeoffs": tradeoffs_for(report),
+    }
 
 
 def review(compose_yaml: str, nfrs: dict | None = None) -> str:
@@ -47,6 +53,7 @@ def _empty_result() -> dict:
         "assumptions": [], "confidence": "low", "notes": [],
         "report_text": _NO_COMPONENTS_TEXT,
         "roast_text": _NO_COMPONENTS_TEXT,
+        "tradeoffs": [],
     }
 
 
