@@ -24,11 +24,13 @@ def review_architecture(
     2. Ask the user for their expected scale and pass expected_dau (daily active
        users), plus read_write_ratio if known. Without expected_dau the result
        assumes 100k users and is reported as low confidence.
-    3. Show the user `report_text`; use the structured fields to reason or compare.
+    3. Prefer report["roast_text"] as the headline to show the user (Brok's voice);
+       report["report_text"] is the same verdict in a neutral tone.
+    4. Use the structured fields to reason or compare.
 
     Returns a dict: bottleneck (component name or null), max_dau (int or null),
     confidence ('low'|'high'), assumptions (list of stated assumptions),
-    utilizations (per-component load vs ceiling), notes, and report_text.
+    utilizations (per-component load vs ceiling), notes, report_text, and roast_text.
     """
     traffic = build_traffic(expected_dau, requests_per_user_per_day,
                             read_write_ratio, payload_kb, peak_factor)
@@ -52,8 +54,10 @@ def review_components(
     dicts. Valid types: relational_db, cache, queue, cdn, app_server, object_store,
     load_balancer. Any other type string is reported as not-estimated (Brok will
     not guess). Pass expected_dau for a high-confidence result.
+    Prefer report["roast_text"] as the headline to show the user (Brok's voice);
+    report["report_text"] is the same verdict in a neutral tone.
 
-    Returns the same dict shape as review_architecture.
+    Returns the same dict shape as review_architecture (with roast_text and report_text).
     """
     traffic = build_traffic(expected_dau, requests_per_user_per_day,
                             read_write_ratio, payload_kb, peak_factor)
