@@ -4,6 +4,7 @@ import hashlib
 
 from brok.models import CapacityReport, ComponentType
 from brok.tradeoffs import tradeoffs_for
+from brok.lenses.latency import KNEE, latency_multiplier
 
 FIX_HINTS: dict[ComponentType, str] = {
     ComponentType.RELATIONAL_DB: "shard it by a high cardinality key, or put a write queue in front",
@@ -29,6 +30,10 @@ BROK_LINES: dict[str, list[str]] = {
     "slight": [
         "{component} is a touch over, about {factor}x. You get to about {max_dau} users before it complains. {fix}.",
         "{component} is just past its line, {factor}x. Roughly {max_dau} users and then it grumbles. {fix}.",
+    ],
+    "degrading": [
+        "{component} is running {pct} hot. Under the cap, sure, but past the knee, so queueing already puts latency near {mult}x idle. Real headroom is about {safe_dau} users, not {max_dau}. {fix}.",
+        "{component} sits at {pct} of its ceiling. It works until it does not; at this load latency is about {mult}x its idle baseline. Plan for about {safe_dau} users. {fix}.",
     ],
     "fits": [
         "Fine. It holds to about {max_dau} users before {component} is the wall. I have seen worse today.",
@@ -65,6 +70,8 @@ def classify(report: CapacityReport) -> str:
         if util >= 2:
             return "bad"
         return "slight"
+    if util >= KNEE:
+        return "degrading"
     return "fits"
 
 
@@ -82,8 +89,13 @@ def roast_line(report: CapacityReport) -> str:
     fix = FIX_HINTS.get(ctype, _DEFAULT_FIX)
     factor = f"{round(util, 1):g}" if util is not None else "?"
     max_dau = f"{report.max_dau:,}" if report.max_dau is not None else "?"
+    safe_dau = f"{int(report.max_dau * KNEE):,}" if report.max_dau is not None else "?"
+    pct = f"{round(util * 100)}%" if util is not None else "?"
+    mult_val = latency_multiplier(util)
+    mult = f"{mult_val:.1f}" if mult_val is not None else "?"
     return template.format(component=report.bottleneck, factor=factor,
-                           max_dau=max_dau, fix=fix)
+                           max_dau=max_dau, fix=fix, safe_dau=safe_dau,
+                           pct=pct, mult=mult)
 
 
 _HEADLINE = {
@@ -91,6 +103,7 @@ _HEADLINE = {
     "bad": "WALK AWAY (for now)",
     "low_conf_over": "WALK AWAY (for now)",
     "slight": "PUSHING IT",
+    "degrading": "CUTTING IT CLOSE",
     "fits": "IT HOLDS",
     "insufficient": "NOT ENOUGH TO JUDGE",
 }
