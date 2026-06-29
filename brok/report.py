@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from sindri.models import CapacityReport
+from brok.models import CapacityReport
 
 _OVERLOAD = 1.0
 
 
 def render_report(report: CapacityReport) -> str:
-    lines: list[str] = ["Sindri capacity review", ""]
+    lines: list[str] = ["Brok capacity review", ""]
 
     if report.assumptions:
         lines.append("Assumptions (correct me and I will re-run):")

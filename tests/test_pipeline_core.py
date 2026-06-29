@@ -1,5 +1,5 @@
-from sindri.models import Component, ComponentType, DesignGraph
-from sindri.pipeline import build_result, build_traffic, review
+from brok.models import Component, ComponentType, DesignGraph
+from brok.pipeline import build_result, build_traffic, review
 
 COMPOSE = """
 services:
@@ -39,4 +39,4 @@ def test_build_traffic_maps_and_drops_none():
 def test_review_still_returns_text():
     out = review(COMPOSE)
     assert isinstance(out, str)
-    assert "Sindri capacity review" in out
+    assert "Brok capacity review" in out

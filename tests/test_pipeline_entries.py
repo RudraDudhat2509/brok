@@ -1,4 +1,4 @@
-from sindri.pipeline import review_from_compose, review_from_components
+from brok.pipeline import review_from_compose, review_from_components
 
 COMPOSE = """
 services:

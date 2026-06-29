@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from sindri.benchmark.golden import GOLDEN_CASES, GoldenCase
-from sindri.benchmark.scorer import CaseResult, score_case
-from sindri.lenses.capacity import analyze_capacity
+from brok.benchmark.golden import GOLDEN_CASES, GoldenCase
+from brok.benchmark.scorer import CaseResult, score_case
+from brok.lenses.capacity import analyze_capacity
 
 
 class BenchmarkResult(BaseModel):
@@ -41,7 +41,7 @@ def run_benchmark(cases: list[GoldenCase] | None = None) -> BenchmarkResult:
 
 
 def format_scorecard(result: BenchmarkResult) -> str:
-    lines = ["Sindri benchmark scorecard", ""]
+    lines = ["Brok benchmark scorecard", ""]
     lines.append(f"  bottleneck accuracy : {result.bottleneck_accuracy:.0%}")
     lines.append(f"  capacity within 2x  : {result.within_2x_rate:.0%}")
     lines.append(f"  off by 100x         : {result.off_by_100x_count}")

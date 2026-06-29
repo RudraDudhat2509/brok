@@ -1,5 +1,5 @@
-from sindri.benchmark.golden import GoldenCase
-from sindri.benchmark.runner import run_case, run_benchmark, format_scorecard
+from brok.benchmark.golden import GoldenCase
+from brok.benchmark.runner import run_case, run_benchmark, format_scorecard
 
 
 def _consistency_db_case():

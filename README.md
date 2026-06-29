@@ -1,10 +1,10 @@
-# Sindri
+# Brok
 
 **An MCP server that estimates a system's real capacity and finds its bottleneck, grounded in cited numbers instead of LLM guesswork.**
 
 You point it at an architecture (a `docker-compose.yml` or a list of components) and tell it the scale you expect. It tells you which component breaks first, roughly how many users the design supports, and why. The reasoning is deterministic. No model runs in the core, so it is free to run and it gives the same answer every time.
 
-Named after Sindri, the Norse master smith who forged things built to hold up under strain.
+Named after Brok, the blunt dwarf smith of Norse myth (and Sindri's gruffer, funnier brother in God of War): he respects work that holds and has no patience for the lazy kind. The matching dry-roast voice is on the roadmap; today the verdicts are plain and deterministic.
 
 ---
 
@@ -14,13 +14,13 @@ Most people, and increasingly most AI coding assistants, design systems without 
 
 The obvious AI approach, "ask the model if my architecture is good," produces confident, generic, ungrounded advice. Frontier models are mediocre at system design and small local models are worse. So the naive build is a wrapper that returns plausible sounding nonsense.
 
-Sindri takes the opposite approach: **the model never reasons about systems. Deterministic code does, using real, cited numbers.**
+Brok takes the opposite approach: **the model never reasons about systems. Deterministic code does, using real, cited numbers.**
 
 ---
 
 ## What it does today
 
-Given an architecture and an expected scale, Sindri returns:
+Given an architecture and an expected scale, Brok returns:
 
 - the **bottleneck** component (the first thing to saturate),
 - the **max user capacity** the design supports before that wall,
@@ -42,7 +42,7 @@ Note what it caught: the wall is the single **app tier**, not the database every
 
 ## The data behind it
 
-Sindri does not invent numbers. Every capacity verdict traces to a curated, cited capability table (the conservative low end of each range is used for verdicts):
+Brok does not invent numbers. Every capacity verdict traces to a curated, cited capability table (the conservative low end of each range is used for verdicts):
 
 | Component | Throughput (single instance) | Source |
 |-----------|------------------------------|--------|
@@ -65,7 +65,7 @@ python scripts/bench.py
 ```
 
 ```
-Sindri benchmark scorecard
+Brok benchmark scorecard
 
   bottleneck accuracy : 100%
   capacity within 2x  : 100%
@@ -80,7 +80,7 @@ What that does and does not mean matters, so here is the honest framing. The ben
 2. **Behavior.** Does it abstain on unknown components, and does it avoid crying wolf on a tiny hobby app?
 3. **Honesty.** Real systems like Instagram (which sharded for data volume, not throughput) and Discord (a read hot partition) are included as documented out of model cases. They run, they stay visible in the scorecard, and they are excluded from accuracy scoring because they sit outside what a single instance throughput model can judge.
 
-So the claim is precise: **Sindri is internally consistent with its cited numbers, behaves correctly, and is honest about what it cannot see.** It is not a claim that it predicts every real world scaling wall.
+So the claim is precise: **Brok is internally consistent with its cited numbers, behaves correctly, and is honest about what it cannot see.** It is not a claim that it predicts every real world scaling wall.
 
 ---
 
@@ -90,10 +90,10 @@ So the claim is precise: **Sindri is internally consistent with its cited number
   Claude Code (or any MCP client)
         |
         v
-  Sindri MCP
+  Brok MCP
         |
    parse to a Design Graph        <- the caller does any English parsing;
-        |                            Sindri only consumes structured input
+        |                            Brok only consumes structured input
         v
    deterministic capacity lens    <- cited ceilings + back of envelope math
         |
@@ -101,13 +101,13 @@ So the claim is precise: **Sindri is internally consistent with its cited number
    verdict: bottleneck + max users + per component utilization
 ```
 
-The split is the whole point. The calling assistant (which is already an LLM) turns your prose or code into a structured graph. Sindri's engine, which contains no model and makes no network calls, does the actual reasoning against cited numbers. That is why it is free, deterministic, and not a wrapper.
+The split is the whole point. The calling assistant (which is already an LLM) turns your prose or code into a structured graph. Brok's engine, which contains no model and makes no network calls, does the actual reasoning against cited numbers. That is why it is free, deterministic, and not a wrapper.
 
 ---
 
 ## Limits (read this before trusting a verdict)
 
-Sindri is honest about its boundaries on purpose:
+Brok is honest about its boundaries on purpose:
 
 - **Capacity only, for now.** It does not yet model latency, cost, or design anti patterns. Those are on the roadmap below.
 - **Throughput only.** It reasons about request throughput, not data volume, connection limits, hot partitions, or lock contention, which is where many real databases actually die.
@@ -120,8 +120,8 @@ Sindri is honest about its boundaries on purpose:
 ## Install
 
 ```bash
-git clone https://github.com/RudraDudhat2509/sindri
-cd sindri
+git clone https://github.com/RudraDudhat2509/brok
+cd brok
 pip install -e ".[dev]"
 ```
 
@@ -130,7 +130,7 @@ Add it to an MCP client (for example Claude Desktop), in the `mcpServers` block:
 ```json
 {
   "mcpServers": {
-    "sindri": { "command": "python", "args": ["-m", "sindri.server"] }
+    "brok": { "command": "python", "args": ["-m", "brok.server"] }
   }
 }
 ```
@@ -139,7 +139,7 @@ Add it to an MCP client (for example Claude Desktop), in the `mcpServers` block:
 
 ## Usage
 
-Sindri exposes two tools. The calling assistant picks the right one and, importantly, should pass the expected scale (`expected_dau`); without it, the result falls back to assumed defaults and is reported as low confidence.
+Brok exposes two tools. The calling assistant picks the right one and, importantly, should pass the expected scale (`expected_dau`); without it, the result falls back to assumed defaults and is reported as low confidence.
 
 **`review_architecture(compose_yaml, expected_dau=..., read_write_ratio=..., ...)`**
 When the project has a `docker-compose.yml`, the assistant reads it and passes the contents plus the expected scale.
@@ -150,7 +150,7 @@ When there is no compose file, the assistant infers the components from the code
 Both return a structured result the assistant can display and reason over:
 
 ```python
-import sindri.server as s
+import brok.server as s
 
 result = s.review_architecture(
     """
@@ -179,13 +179,13 @@ Ahead:
 
 - **Latency and cost lenses.** The same engine, with a latency numbers table and a rough cost table, so a verdict covers "is it fast" and "what is the bill," not just "how many users."
 - **Anti pattern linter.** Structural checks for single points of failure, dual writes, write to CDN, and hot partitions (the failure mode behind the Discord case above).
-- **Plain English verdicts with personality.** A narrator layer that phrases the deterministic findings in a sharper voice, while the numbers stay computed by the engine.
+- **The Brok voice.** A narrator layer that phrases the deterministic findings in Brok's dry, blunt register (see [docs/brok-voice.md](docs/brok-voice.md)), while the numbers stay computed by the engine and the tool still abstains when it is unsure.
 
 ---
 
 ## Why it is built this way
 
-Sindri is deliberately the opposite of a confident guess. The intelligence lives in cited data and arithmetic, the model is kept away from the judgment, and the tool abstains when it does not know. A capacity estimate you can trust is worth more than a roast that might be wrong.
+Brok is deliberately the opposite of a confident guess. The intelligence lives in cited data and arithmetic, the model is kept away from the judgment, and the tool abstains when it does not know. A capacity estimate you can trust is worth more than a roast that might be wrong.
 
 ## Development
 

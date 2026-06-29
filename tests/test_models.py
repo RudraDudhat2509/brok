@@ -1,4 +1,4 @@
-from sindri.models import (
+from brok.models import (
     ComponentType, Component, NFRs, DesignGraph, Utilization, CapacityReport,
 )
 

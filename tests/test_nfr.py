@@ -1,4 +1,4 @@
-from sindri.nfr import resolve_nfrs, DEFAULT_NFRS
+from brok.nfr import resolve_nfrs, DEFAULT_NFRS
 
 
 def test_no_input_uses_all_defaults_and_states_them():

@@ -1,5 +1,5 @@
-from sindri.models import Component, ComponentType, DesignGraph, NFRs
-from sindri.lenses.capacity import analyze_capacity, peak_rps
+from brok.models import Component, ComponentType, DesignGraph, NFRs
+from brok.lenses.capacity import analyze_capacity, peak_rps
 
 
 def _nfrs(dau):

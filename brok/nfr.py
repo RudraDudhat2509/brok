@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sindri.models import NFRs
+from brok.models import NFRs
 
 DEFAULT_NFRS = NFRs(
     dau=100_000, requests_per_user_per_day=50, read_write_ratio=10.0,

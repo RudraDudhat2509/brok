@@ -1,4 +1,4 @@
-from sindri.pipeline import review
+from brok.pipeline import review
 
 COMPOSE = """
 services:
@@ -23,5 +23,5 @@ def test_review_states_assumptions_when_nfrs_missing():
 
 def test_review_empty_compose_is_friendly_not_crash():
     out = review("::: not yaml :::")
-    assert "Sindri" in out
+    assert "Brok" in out
     assert "couldn't" in out.lower() or "no components" in out.lower()

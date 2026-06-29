@@ -1,4 +1,4 @@
-from sindri.benchmark.golden import GOLDEN_CASES
+from brok.benchmark.golden import GOLDEN_CASES
 
 
 def test_has_all_three_categories():

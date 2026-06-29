@@ -1,5 +1,5 @@
-from sindri.models import CapacityReport, ComponentType, Utilization
-from sindri.report import render_report
+from brok.models import CapacityReport, ComponentType, Utilization
+from brok.report import render_report
 
 
 def _util(name, util):

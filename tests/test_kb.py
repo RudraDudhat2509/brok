@@ -1,5 +1,5 @@
-from sindri.models import ComponentType
-from sindri.kb import get_capability, CAPABILITY_KB
+from brok.models import ComponentType
+from brok.kb import get_capability, CAPABILITY_KB
 
 
 def test_relational_db_has_cited_conservative_write_ceiling():

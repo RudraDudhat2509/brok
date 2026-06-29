@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from sindri.lenses.capacity import analyze_capacity
-from sindri.models import Component, ComponentType, DesignGraph
-from sindri.nfr import resolve_nfrs
-from sindri.parsers.compose import parse_compose
-from sindri.report import render_report
+from brok.lenses.capacity import analyze_capacity
+from brok.models import Component, ComponentType, DesignGraph
+from brok.nfr import resolve_nfrs
+from brok.parsers.compose import parse_compose
+from brok.report import render_report
 
 _NO_COMPONENTS_TEXT = (
-    "Sindri capacity review\n\n"
+    "Brok capacity review\n\n"
     "I couldn't find any components. Give me a docker-compose with services, "
     "or pass a component list."
 )

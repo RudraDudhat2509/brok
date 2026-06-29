@@ -1,5 +1,5 @@
-from sindri.models import ComponentType
-from sindri.parsers.compose import classify_image, parse_compose
+from brok.models import ComponentType
+from brok.parsers.compose import classify_image, parse_compose
 
 COMPOSE = """
 services:

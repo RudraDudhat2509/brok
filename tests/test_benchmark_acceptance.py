@@ -1,9 +1,9 @@
-from sindri.benchmark.runner import run_benchmark
+from brok.benchmark.runner import run_benchmark
 
 
 def test_meets_section_3_1_thresholds_on_golden_set():
     res = run_benchmark()  # the real GOLDEN_CASES
-    # §3.1 acceptance bar, measured on the cases Sindri can faithfully score:
+    # §3.1 acceptance bar, measured on the cases Brok can faithfully score:
     assert res.bottleneck_accuracy >= 0.8
     assert res.within_2x_rate >= 0.8
     assert res.off_by_100x_count == 0

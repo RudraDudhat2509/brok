@@ -1,4 +1,4 @@
-import sindri.server as server
+import brok.server as server
 
 
 def test_review_architecture_passthrough_dau_drops_assumption():

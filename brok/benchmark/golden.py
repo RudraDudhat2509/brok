@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from sindri.models import Component, ComponentType, DesignGraph, NFRs
+from brok.models import Component, ComponentType, DesignGraph, NFRs
 
 
 class GoldenCase(BaseModel):
@@ -102,7 +102,7 @@ GOLDEN_CASES: list[GoldenCase] = [
         scored_for_accuracy=False,
         note="A 1k-user app must NOT be roasted as overloaded. Do not cry wolf.",
     ),
-    # ---- out of model: documented real systems Sindri v1 cannot fully judge ----
+    # ---- out of model: documented real systems Brok v1 cannot fully judge ----
     GoldenCase(
         name="instagram-2011-volume-bound",
         source_url="https://read.engineerscodex.com/p/how-instagram-scaled-to-14-million",
@@ -115,7 +115,7 @@ GOLDEN_CASES: list[GoldenCase] = [
         expect_overload=False,
         scored_for_accuracy=False,
         note="Instagram sharded Postgres at ~14M users due to DATA VOLUME + connection "
-             "overhead + hot rows, at only ~115 writes/s. Sindri (single-instance, "
+             "overhead + hot rows, at only ~115 writes/s. Brok (single-instance, "
              "uniform-traffic) flags the app tier at ~1.6x overloaded, and its Postgres "
              "write throughput is fine. Neither matches the real historical wall (volume), "
              "which is outside v1's throughput model. Documented, not graded.",
@@ -132,7 +132,7 @@ GOLDEN_CASES: list[GoldenCase] = [
         expect_overload=False,
         scored_for_accuracy=False,
         note="Discord's real wall was a READ hot-partition on Cassandra (unknown to the KB, "
-             "so Sindri abstains on that store). Under uniform-traffic Sindri flags the api "
+             "so Brok abstains on that store). Under uniform-traffic Brok flags the api "
              "app_server as heavily overloaded. Hot partitions are a Plan 4 anti-pattern, "
              "not a v1 throughput verdict. Documented, not graded.",
     ),

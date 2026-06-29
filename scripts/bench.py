@@ -1,4 +1,4 @@
-from sindri.benchmark.runner import run_benchmark, format_scorecard
+from brok.benchmark.runner import run_benchmark, format_scorecard
 
 
 def main() -> None:

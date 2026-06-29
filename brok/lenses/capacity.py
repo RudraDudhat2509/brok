@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from sindri.kb import get_capability
-from sindri.models import (
+from brok.kb import get_capability
+from brok.models import (
     CapacityReport, ComponentType, DesignGraph, NFRs, Utilization,
 )
 

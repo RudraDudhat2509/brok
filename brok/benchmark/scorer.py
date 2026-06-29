@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from sindri.benchmark.golden import GoldenCase
-from sindri.kb import get_capability
-from sindri.models import CapacityReport
+from brok.benchmark.golden import GoldenCase
+from brok.kb import get_capability
+from brok.models import CapacityReport
 
 
 class CaseResult(BaseModel):

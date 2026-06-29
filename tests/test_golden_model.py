@@ -1,5 +1,5 @@
-from sindri.models import ComponentType
-from sindri.benchmark.golden import GoldenCase
+from brok.models import ComponentType
+from brok.benchmark.golden import GoldenCase
 
 
 def _case(**kw):

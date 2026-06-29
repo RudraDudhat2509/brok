@@ -1,6 +1,6 @@
-from sindri.models import CapacityReport, ComponentType, Utilization
-from sindri.benchmark.golden import GoldenCase
-from sindri.benchmark.scorer import score_case
+from brok.models import CapacityReport, ComponentType, Utilization
+from brok.benchmark.golden import GoldenCase
+from brok.benchmark.scorer import score_case
 
 
 def _case(**kw):

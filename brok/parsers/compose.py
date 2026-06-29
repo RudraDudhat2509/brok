@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import yaml
 
-from sindri.models import Component, ComponentType, DesignGraph
+from brok.models import Component, ComponentType, DesignGraph
 
 IMAGE_TYPE_MAP: dict[str, ComponentType] = {
     "postgres": ComponentType.RELATIONAL_DB,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-from sindri.models import ComponentType
+from brok.models import ComponentType
 
 
 class Capability(BaseModel):

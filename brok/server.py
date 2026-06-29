@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import FastMCP
 
-from sindri.pipeline import build_traffic, review_from_components, review_from_compose
+from brok.pipeline import build_traffic, review_from_components, review_from_compose
 
-mcp = FastMCP("sindri")
+mcp = FastMCP("brok")
 
 
 @mcp.tool()
@@ -50,7 +50,7 @@ def review_components(
     How to use this (for the calling assistant): infer the components yourself from
     the user's description or code, and pass them as a list of {"name", "type"}
     dicts. Valid types: relational_db, cache, queue, cdn, app_server, object_store,
-    load_balancer. Any other type string is reported as not-estimated (Sindri will
+    load_balancer. Any other type string is reported as not-estimated (Brok will
     not guess). Pass expected_dau for a high-confidence result.
 
     Returns the same dict shape as review_architecture.
