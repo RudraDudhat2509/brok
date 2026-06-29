@@ -25,6 +25,8 @@ Given an architecture and an expected scale, Brok returns:
 - the **bottleneck** component (the first thing to saturate),
 - the **max user capacity** the design supports before that wall,
 - the **per component utilization** (load versus its cited ceiling),
+- a **latency warning** when a component is past the queueing knee (about 70% utilization), with how many times its idle latency you are already paying and the user count it stays safe to,
+- a **rough monthly cost** (compute plus egress), so you see the bill, not just the breaking point,
 - the **trade-offs** each component carries (when it is fine, what it costs, the move when you outgrow it), curated and cited,
 - the **assumptions** it made for any inputs you did not provide, stated plainly,
 - all of it phrased in the **Brok roast voice**, a deterministic narrator layer (no model, fixed templates, real numbers).
@@ -112,13 +114,13 @@ So the claim is precise: **Brok is internally consistent with its cited numbers,
    parse to a Design Graph        <- the caller does any English parsing;
         |                            Brok only consumes structured input
         v
-   deterministic capacity lens    <- cited ceilings + back of envelope math
-        |
+   capacity + latency + cost lens <- cited ceilings, back of envelope math,
+        |                            queueing knee, curated cost table
         v
    trade-off layer + roast voice  <- curated cited trade-offs, phrased by a
         |                            template narrator (still no model)
         v
-   verdict: bottleneck + max users + per component utilization + trade-offs
+   verdict: bottleneck + max users + utilization + latency + cost + trade-offs
 ```
 
 The split is the whole point. The calling assistant (which is already an LLM) turns your prose or code into a structured graph. Brok's engine, which contains no model and makes no network calls, does the actual reasoning against cited numbers. That is why it is free, deterministic, and not a wrapper.
@@ -129,7 +131,8 @@ The split is the whole point. The calling assistant (which is already an LLM) tu
 
 Brok is honest about its boundaries on purpose:
 
-- **No latency or cost yet.** It models capacity and surfaces design trade-offs, but it does not yet compute latency or a cost estimate. Those are on the roadmap below.
+- **Latency is relative, not absolute.** The queueing signal tells you how many times the idle latency you are paying at a given load (`1 / (1 - utilization)`), not a millisecond number. Absolute latency needs per-handler compute time and cache hit rates Brok cannot know, so it does not invent them.
+- **Cost is order of magnitude.** Compute is a mid-tier table and egress is computed from your traffic; the figure is a "right ballpark" sanity check on the bill, not a billing forecast. Storage volume and per-request charges are not modeled.
 - **Throughput only.** It reasons about request throughput, not data volume, connection limits, hot partitions, or lock contention, which is where many real databases actually die.
 - **Single instance.** It does not model replicas or shards. It tells you when a single instance of a component is the wall, which is exactly the advice a pre scaling design needs.
 - **Order of magnitude.** Component throughput varies 10x to 100x by hardware and config, so treat the numbers as "right ballpark," not precise.
@@ -186,9 +189,10 @@ print(result["bottleneck"])   # "api"
 print(result["max_dau"])      # 1152000
 print(result["roast_text"])   # the Brok-voiced verdict, the headline to show
 print(result["tradeoffs"])    # structured trade-offs per component, to reason over
+print(result["cost"])         # rough monthly compute plus egress
 ```
 
-Returned fields: `bottleneck`, `max_dau`, `confidence`, `assumptions`, `utilizations`, `notes`, `tradeoffs`, `report_text`, `roast_text`.
+Returned fields: `bottleneck`, `max_dau`, `confidence`, `assumptions`, `utilizations`, `notes`, `tradeoffs`, `cost`, `report_text`, `roast_text`.
 
 A companion Claude Code skill ships in [`skill/SKILL.md`](skill/SKILL.md): it tells the assistant to consult Brok whenever it is designing, scaling, or reviewing a system, or choosing a datastore, cache, or queue.
 
@@ -196,12 +200,12 @@ A companion Claude Code skill ships in [`skill/SKILL.md`](skill/SKILL.md): it te
 
 ## Roadmap
 
-Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, and the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine).
+Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), and a rough cost lens (compute plus egress).
 
 Ahead:
 
-- **Latency and cost lenses.** The same engine, with a queueing-aware latency signal and a rough cost table, so a verdict covers "is it fast" and "what is the bill," not just "how many users."
 - **Anti pattern linter.** Structural checks for single points of failure, dual writes, write to CDN, and hot partitions (the failure mode behind the Discord case above).
+- **Connection and data-volume limits.** The throughput model does not yet see connection-pool exhaustion or data-volume walls, which is where many real databases actually die.
 
 ---
 
