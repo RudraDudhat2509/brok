@@ -142,3 +142,16 @@ def render_roast(report: CapacityReport) -> str:
             lines.append(f"    cost: {to['cost']}. outgrow it: {to['move']}")
 
     return "\n".join(lines)
+
+
+def render_cost(cost: dict | None) -> str:
+    if not cost:
+        return ""
+    body = [
+        "WHAT IT COSTS (rough monthly):",
+        f"  compute ${cost['monthly_compute_usd']:,.0f}, egress "
+        f"${cost['monthly_egress_usd']:,.0f}, total ${cost['monthly_total_usd']:,.0f}.",
+        f"  about {cost['egress_gb_per_month']:,.0f} GB/month leaving the system, "
+        f"order-of-magnitude.",
+    ]
+    return "\n\n" + "\n".join(body)
