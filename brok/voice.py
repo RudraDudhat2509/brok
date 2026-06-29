@@ -83,3 +83,40 @@ def roast_line(report: CapacityReport) -> str:
     max_dau = f"{report.max_dau:,}" if report.max_dau is not None else "?"
     return template.format(component=report.bottleneck, factor=factor,
                            max_dau=max_dau, fix=fix)
+
+
+_HEADLINE = {
+    "brutal": "WALK AWAY (for now)",
+    "bad": "WALK AWAY (for now)",
+    "low_conf_over": "WALK AWAY (for now)",
+    "slight": "PUSHING IT",
+    "fits": "IT HOLDS",
+    "insufficient": "NOT ENOUGH TO JUDGE",
+}
+
+
+def render_roast(report: CapacityReport) -> str:
+    bucket = classify(report)
+    lines = [f"BROK: {_HEADLINE[bucket]}", "", roast_line(report)]
+
+    if report.assumptions:
+        lines.append("")
+        lines.append("Working off these assumptions (give me real ones and I re-run):")
+        lines.extend(f"  {a}" for a in report.assumptions)
+    lines.append("")
+    lines.append(f"Confidence: {report.confidence}.")
+
+    estimated = [u for u in report.utilizations if u.estimated and u.ceiling_per_sec]
+    if estimated:
+        lines.append("")
+        lines.append("Receipts:")
+        for u in estimated:
+            lines.append(f"  {u.component}: ~{u.load_per_sec:,.0f}/sec vs "
+                         f"~{u.ceiling_per_sec:,.0f} ceiling")
+
+    if report.notes:
+        lines.append("")
+        lines.append("Not estimated:")
+        lines.extend(f"  {n}" for n in report.notes)
+
+    return "\n".join(lines)
