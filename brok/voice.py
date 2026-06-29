@@ -61,7 +61,7 @@ def classify(report: CapacityReport) -> str:
     util, _ = _bottleneck_util_and_type(report)
     if report.bottleneck is None or util is None:
         return "insufficient"
-    if util > 1.0:
+    if util >= 1.0:
         dau_assumed = any("daily active users" in a for a in report.assumptions)
         if dau_assumed:
             return "low_conf_over"
