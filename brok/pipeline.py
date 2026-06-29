@@ -5,8 +5,9 @@ from brok.models import Component, ComponentType, DesignGraph
 from brok.nfr import resolve_nfrs
 from brok.parsers.compose import parse_compose
 from brok.report import render_report
-from brok.voice import render_roast
+from brok.voice import render_cost, render_roast
 from brok.tradeoffs import tradeoffs_for
+from brok.lenses.cost import estimate_cost
 
 _NO_COMPONENTS_TEXT = (
     "Brok capacity review\n\n"
@@ -32,11 +33,13 @@ def build_result(graph: DesignGraph, traffic: dict | None = None) -> dict:
     resolved, assumptions = resolve_nfrs(traffic)
     confidence = "low" if assumptions else "high"
     report = analyze_capacity(graph, resolved, assumptions, confidence)
+    cost = estimate_cost(graph, resolved)
     return {
         **report.model_dump(mode="json"),
         "report_text": render_report(report),
-        "roast_text": render_roast(report),
+        "roast_text": render_roast(report) + render_cost(cost),
         "tradeoffs": tradeoffs_for(report),
+        "cost": cost,
     }
 
 
@@ -54,6 +57,7 @@ def _empty_result() -> dict:
         "report_text": _NO_COMPONENTS_TEXT,
         "roast_text": _NO_COMPONENTS_TEXT,
         "tradeoffs": [],
+        "cost": None,
     }
 
 
