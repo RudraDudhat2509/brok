@@ -13,5 +13,5 @@ def test_meets_section_3_1_thresholds_on_golden_set():
 def test_does_not_cry_wolf_or_overclaim():
     res = run_benchmark()
     # behavior + out-of-model honesty: every case's overload verdict matches expectation
-    # (tiny app fits; Instagram throughput fits; Discord store abstained).
+    # (tiny app fits; Instagram app flagged but throughput ok; Discord store documented/excluded).
     assert res.overload_accuracy == 1.0

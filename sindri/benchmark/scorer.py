@@ -42,10 +42,11 @@ def score_case(case: GoldenCase, report: CapacityReport) -> CaseResult:
         within_2x = (0.5 * exp) <= got <= (2 * exp)
         off_by_100x = got < (exp / 100) or got > (exp * 100)
 
-    cited = all(
-        (get_capability(u.type) is not None and bool(get_capability(u.type).source))
-        for u in report.utilizations if u.estimated
-    )
+    def _is_cited(u):
+        cap = get_capability(u.type)
+        return cap is not None and bool(cap.source)
+
+    cited = all(_is_cited(u) for u in report.utilizations if u.estimated)
 
     overload = any(
         u.component == report.bottleneck and u.utilization is not None and u.utilization > 1.0

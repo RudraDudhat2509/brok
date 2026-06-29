@@ -115,8 +115,10 @@ GOLDEN_CASES: list[GoldenCase] = [
         expect_overload=False,
         scored_for_accuracy=False,
         note="Instagram sharded Postgres at ~14M users due to DATA VOLUME + connection "
-             "overhead + hot rows, at only ~115 writes/s. Throughput was fine, so Sindri "
-             "correctly says 'fits'. The real wall is outside v1's throughput model.",
+             "overhead + hot rows, at only ~115 writes/s. Sindri (single-instance, "
+             "uniform-traffic) flags the app tier at ~1.6x overloaded, and its Postgres "
+             "write throughput is fine. Neither matches the real historical wall (volume), "
+             "which is outside v1's throughput model. Documented, not graded.",
     ),
     GoldenCase(
         name="discord-message-store-hot-partition",
@@ -129,8 +131,9 @@ GOLDEN_CASES: list[GoldenCase] = [
         expected_capacity_dau=None,
         expect_overload=False,
         scored_for_accuracy=False,
-        note="Discord's wall was a READ hot-partition on Cassandra (not in the KB, so "
-             "Sindri abstains on it). Hot partitions are a Plan 4 anti-pattern, not a "
-             "v1 throughput verdict.",
+        note="Discord's real wall was a READ hot-partition on Cassandra (unknown to the KB, "
+             "so Sindri abstains on that store). Under uniform-traffic Sindri flags the api "
+             "app_server as heavily overloaded. Hot partitions are a Plan 4 anti-pattern, "
+             "not a v1 throughput verdict. Documented, not graded.",
     ),
 ]
