@@ -35,7 +35,8 @@ def run_benchmark(cases: list[GoldenCase] | None = None) -> BenchmarkResult:
         within_2x_rate=_rate([r.within_2x for r in results if r.within_2x is not None]),
         off_by_100x_count=sum(1 for r in results if r.off_by_100x),
         citeability=_rate([r.cited for r in results]),
-        overload_accuracy=_rate([r.overload_correct for r in results]),
+        overload_accuracy=_rate([r.overload_correct for r in results
+                                   if r.category != "out_of_model"]),
     )
 
 
