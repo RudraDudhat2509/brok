@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 
 from brok.models import CapacityReport, ComponentType
+from brok.tradeoffs import tradeoffs_for
 
 FIX_HINTS: dict[ComponentType, str] = {
     ComponentType.RELATIONAL_DB: "shard it by a high cardinality key, or put a write queue in front",
@@ -118,5 +119,13 @@ def render_roast(report: CapacityReport) -> str:
         lines.append("")
         lines.append("Not estimated:")
         lines.extend(f"  {n}" for n in report.notes)
+
+    tos = tradeoffs_for(report)
+    if tos:
+        lines.append("")
+        lines.append("THE TRADE-OFFS YOU ARE MAKING:")
+        for to in tos:
+            lines.append(f"  {to['type']}: fine {to['when_fine']}.")
+            lines.append(f"    cost: {to['cost']}. outgrow it: {to['move']}")
 
     return "\n".join(lines)
