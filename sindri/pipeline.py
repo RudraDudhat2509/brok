@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from sindri.lenses.capacity import analyze_capacity
-from sindri.models import DesignGraph
+from sindri.models import Component, ComponentType, DesignGraph
 from sindri.nfr import resolve_nfrs
 from sindri.parsers.compose import parse_compose
 from sindri.report import render_report
@@ -38,3 +38,32 @@ def review(compose_yaml: str, nfrs: dict | None = None) -> str:
     if not graph.components:
         return _NO_COMPONENTS_TEXT
     return build_result(graph, nfrs)["report_text"]
+
+
+def _empty_result() -> dict:
+    return {
+        "bottleneck": None, "max_dau": None, "utilizations": [],
+        "assumptions": [], "confidence": "low", "notes": [],
+        "report_text": _NO_COMPONENTS_TEXT,
+    }
+
+
+def review_from_compose(compose_yaml: str, traffic: dict | None = None) -> dict:
+    graph = parse_compose(compose_yaml)
+    if not graph.components:
+        return _empty_result()
+    return build_result(graph, traffic)
+
+
+def review_from_components(components: list[dict], traffic: dict | None = None) -> dict:
+    comps = []
+    for c in components:
+        try:
+            ctype = ComponentType(c.get("type", ""))
+        except ValueError:
+            ctype = ComponentType.UNKNOWN
+        comps.append(Component(name=str(c.get("name", "?")), type=ctype))
+    graph = DesignGraph(components=comps)
+    if not graph.components:
+        return _empty_result()
+    return build_result(graph, traffic)
