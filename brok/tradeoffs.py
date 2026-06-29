@@ -45,29 +45,30 @@ TRADEOFFS: dict[ComponentType, Tradeoff] = {
         gain="massive read fan-out, served close to the user",
         cost="useless for writes or per-user dynamic data; cache purge complexity",
         move="never route writes through it; for dynamic data use a cache or an edge function",
-        source="CDN fundamentals",
+        source="CDN: massive read fan-out; writes do not belong on a CDN (System Design Primer, CDN)",
     ),
     ComponentType.APP_SERVER: Tradeoff(
         when_fine="almost always, as a stateless app tier",
         gain="scales out horizontally behind a load balancer, cheaply",
         cost="a single instance caps at low thousands of req/sec; state must live elsewhere",
         move="add instances behind the load balancer; keep the handlers stateless",
-        source="horizontal scaling fundamentals",
+        source="Single app instance: low thousands RPS typical (order-of-magnitude); horizontal scaling pattern",
     ),
     ComponentType.OBJECT_STORE: Tradeoff(
         when_fine="large blobs (images, video, files) and high-throughput reads",
         gain="cheap, durable, effectively unlimited capacity",
         cost="higher per-request latency than memory or a database; some stores list "
-             "eventually consistently",
-        move="put a CDN in front of the hot read paths",
-        source="object storage fundamentals",
+             "eventually consistently; per-prefix throughput is bounded (about 3.5k writes/sec, "
+             "5.5k reads/sec on S3-class), so hot keys throttle",
+        move="spread the keys across more prefixes, and put a CDN in front of the hot read paths",
+        source="Object store (S3-class) per-prefix: ~3.5k w/s, ~5.5k r/s (order-of-magnitude)",
     ),
     ComponentType.LOAD_BALANCER: Tradeoff(
         when_fine="any multi-instance tier",
         gain="distributes load, enables horizontal scale and failover",
         cost="itself a single point of failure if not redundant; adds a network hop",
         move="run it redundant, or use a managed balancer",
-        source="load balancing fundamentals",
+        source="L7 load balancer: tens of thousands RPS per node (order-of-magnitude)",
     ),
 }
 
