@@ -29,7 +29,8 @@ def review_architecture(
        structured fields and report["tradeoffs"] to reason about the design.
 
     Returns a dict: bottleneck, max_dau, confidence, assumptions, utilizations, notes,
-    tradeoffs (the grounded pros, cons, and next move for each component), report_text, roast_text.
+    tradeoffs (the grounded pros, cons, and next move for each component), cost (a rough
+    monthly compute plus egress estimate), report_text, roast_text.
     """
     traffic = build_traffic(expected_dau, requests_per_user_per_day,
                             read_write_ratio, payload_kb, peak_factor)
@@ -52,8 +53,8 @@ def review_components(
     Pass components as a list of {"name", "type"} dicts. Valid types: relational_db, cache, queue,
     cdn, app_server, object_store, load_balancer. Any other type is reported as not estimated
     (Brok will not guess). Pass expected_dau for a high-confidence result. Prefer roast_text as the
-    headline; use the structured fields and tradeoffs to reason. Returns the same dict shape as
-    review_architecture.
+    headline; use the structured fields, tradeoffs, and cost to reason. Returns the same dict
+    shape as review_architecture.
     """
     traffic = build_traffic(expected_dau, requests_per_user_per_day,
                             read_write_ratio, payload_kb, peak_factor)
