@@ -20,7 +20,7 @@ Brok takes the opposite approach: **the model never reasons about systems. Deter
 
 ## What it does today
 
-Given an architecture and an expected scale, Brok returns:
+**Capacity review** — given an architecture and expected scale, Brok returns:
 
 - the **bottleneck** component (the first thing to saturate),
 - the **max user capacity** the design supports before that wall,
@@ -30,6 +30,20 @@ Given an architecture and an expected scale, Brok returns:
 - the **trade-offs** each component carries (when it is fine, what it costs, the move when you outgrow it), curated and cited,
 - the **assumptions** it made for any inputs you did not provide, stated plainly,
 - all of it phrased in the **Brok roast voice**, a deterministic narrator layer (no model, fixed templates, real numbers).
+
+**Advisory KB** — a second capability for pre-decision technology and pattern guidance. Before your assistant commits to a technology or pattern, it can ask Brok in natural language and get back a cited, grounded answer:
+
+```
+"kafka vs pubsub for spiky writes"
+"should I use consistent hashing or range sharding"
+"when does CQRS make sense"
+"is Cassandra good for strong consistency"   <- returns: no, here is why
+"how to avoid hot partitions in Kafka"
+```
+
+The KB covers 53 entries across three types: 25 technologies (databases, queues, caches, CDNs, load balancers, object stores, app servers), 18 operational strategies (sharding, cache eviction, delivery guarantees, replication, partitioning), and 10 architectural patterns (CQRS, Event Sourcing, Saga, Outbox Pattern, Circuit Breaker, and more). Every entry has a citation URL. Every `when_to_pick` and `when_not_to_pick` field is a verbose paragraph covering concrete scenarios and real operational signals — not a keyword list.
+
+The retrieval is semantic (local `all-MiniLM-L6-v2`, no API key, no cost), benchmarked at **93.3% recall@3** on a 30-query golden set and **10/10 on a hallucination guard** — 10 queries that models commonly answer wrong (Cassandra for strong consistency, Redis for terabyte datasets, Pub/Sub for strict ordering, Kafka for push delivery, CockroachDB for single-region low latency, and more). Every guard entry explicitly warns against the wrong answer in the `when_not_to_pick` field.
 
 Worked example (`api` + Postgres + Redis at 2,000,000 daily users):
 
@@ -151,22 +165,32 @@ One honest caveat: temperature 0.3 makes both models more stable than default pr
 ```
   Claude Code (or any MCP client)
         |
-        v
-  Brok MCP
+        +-- review_architecture / review_components
+        |         |
+        |    parse to a Design Graph     <- the caller does any English parsing;
+        |         |                         Brok only consumes structured input
+        |         v
+        |    capacity + latency + cost   <- cited ceilings, back of envelope math,
+        |         |                         queueing knee, curated cost table
+        |         v
+        |    trade-off layer + roast     <- curated cited trade-offs, phrased by a
+        |         |                         template narrator (still no model)
+        |         v
+        |    verdict: bottleneck + max users + utilization + cost + trade-offs
         |
-   parse to a Design Graph        <- the caller does any English parsing;
-        |                            Brok only consumes structured input
-        v
-   capacity + latency + cost lens <- cited ceilings, back of envelope math,
-        |                            queueing knee, curated cost table
-        v
-   trade-off layer + roast voice  <- curated cited trade-offs, phrased by a
-        |                            template narrator (still no model)
-        v
-   verdict: bottleneck + max users + utilization + latency + cost + trade-offs
+        +-- query_tradeoffs(question)
+                  |
+             embed question              <- local all-MiniLM-L6-v2, no API key
+                  |
+             cosine similarity over KB   <- 53 cited entries, threshold 0.25
+                  |
+             normalize + compare         <- head-to-head block for same-category
+                  |                         tech matches; common_mistake for patterns
+                  v
+             matches + comparison + citations
 ```
 
-The split is the whole point. The calling assistant (which is already an LLM) turns your prose or code into a structured graph. Brok's engine, which contains no model and makes no network calls, does the actual reasoning against cited numbers. That is why it is free, deterministic, and not a wrapper.
+The split is the whole point. The calling assistant (which is already an LLM) turns your prose or code into a structured graph. Brok's engine, which contains no model and makes no network calls, does the actual reasoning against cited numbers. The one place a local model runs is the embedding step in `query_tradeoffs` — and even then the model only computes a vector; the judgment (threshold, ranking, comparison) is deterministic code.
 
 ---
 
@@ -205,7 +229,9 @@ Add it to an MCP client (for example Claude Desktop), in the `mcpServers` block:
 
 ## Usage
 
-Brok exposes two tools. The calling assistant picks the right one and, importantly, should pass the expected scale (`expected_dau`); without it, the result falls back to assumed defaults and is reported as low confidence.
+Brok exposes three tools. A companion Claude Code skill in [`skill/SKILL.md`](skill/SKILL.md) tells the assistant when to call each one.
+
+---
 
 **`review_architecture(compose_yaml, expected_dau=..., read_write_ratio=..., ...)`**
 When the project has a `docker-compose.yml`, the assistant reads it and passes the contents plus the expected scale.
@@ -237,19 +263,53 @@ print(result["cost"])         # rough monthly compute plus egress
 
 Returned fields: `bottleneck`, `max_dau`, `confidence`, `assumptions`, `utilizations`, `notes`, `tradeoffs`, `cost`, `report_text`, `roast_text`.
 
-A companion Claude Code skill ships in [`skill/SKILL.md`](skill/SKILL.md): it tells the assistant to consult Brok whenever it is designing, scaling, or reviewing a system, or choosing a datastore, cache, or queue.
+---
+
+**`query_tradeoffs(question)`**
+Ask a natural-language question about a technology or architectural pattern before committing to it. Returns matched KB entries with cited trade-offs, a head-to-head comparison block when two technologies from the same category match, and explicit warnings against common wrong uses.
+
+```python
+result = s.query_tradeoffs("kafka vs pubsub for spiky writes")
+
+for m in result["matches"]:
+    print(m["name"])            # "Kafka", "Pub/Sub"
+    print(m["when_not_to_pick"])  # verbose paragraph naming the wrong uses
+    print(m["citation"])        # URL of the source for the claims
+
+print(result["comparison"])     # head-to-head block, non-null when same category
+```
+
+Returned shape: `matches` (list of `{name, type, category, when_to_pick, when_not_to_pick, key_tradeoff, extra, citation}`), `comparison` (head-to-head string or `None`), `note` (`"Brok surfaces trade-offs. You decide."`).
+
+The `extra` field carries `throughput_ceiling` for tech entries and `common_mistake` for pattern entries.
+
+Run the KB benchmark yourself:
+
+```bash
+python scripts/bench_query.py
+```
+
+```
+Golden recall@3: 93.3%  (target >= 85%)  PASS
+Guard pass rate: 10/10  (target 100%)    PASS
+```
 
 ---
 
 ## Roadmap
 
-Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), a rough cost lens (compute plus egress), and a structural anti-pattern linter (five deterministic rules: write-to-CDN, multiple app servers without a load balancer, read-heavy database with no cache, connection pool exhaustion risk, and data volume wall at scale).
+Built and benchmarked today:
+
+- **Capacity engine** with golden set benchmark, usable MCP surface (`review_architecture`, `review_components`), Brok roast voice (deterministic templates, see [docs/brok-voice.md](docs/brok-voice.md)), queueing-aware latency signal, rough cost lens (compute plus egress), and structural anti-pattern linter (five deterministic rules: write-to-CDN, multiple app servers without a load balancer, read-heavy database with no cache, connection pool exhaustion risk, data volume wall at scale).
+- **Advisory KB** (`query_tradeoffs`) — 53 cited entries across technologies, strategies, and patterns; semantic search via local `all-MiniLM-L6-v2`; 93.3% recall@3 on a 30-query golden set; 10/10 hallucination guard; verbose `when_to_pick` / `when_not_to_pick` paragraphs.
 
 The connection pool and data volume rules catch the failure modes throughput math misses entirely. Postgres dies at 100 connections (default) before it dies at 1,000 writes per second; 5M+ DAU on a single relational DB accumulates data volume that requires sharding for storage long before throughput is the issue.
 
 Ahead:
 
 - **Hot partition detection.** A single-partition queue or a sharding key with low cardinality becomes a hot partition under write skew. Detectable from component types and write ratio.
+- **Latency and cost lenses for the KB.** Surface latency ceiling and rough monthly cost alongside trade-offs in `query_tradeoffs` results.
+- **Anti-pattern linter expansion.** Flag known wrong-use patterns (Cassandra for ACID transactions, Kafka without a schema registry, Redis as a primary DB) as deterministic linter rules.
 
 ---
 
