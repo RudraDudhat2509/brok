@@ -105,30 +105,44 @@ So the claim is precise: **Brok is internally consistent with its cited numbers,
 
 ## LLM baseline comparison
 
-The obvious question: why not just ask the model? We ran the same cases through `llama-3.3-70b-versatile` on Groq (3 runs per case, temperature 0.3) and scored the same metrics.
+The obvious question: why not just ask the model? We ran the same cases through `llama-3.3-70b-versatile` (Groq) and `gpt-4o-mini` (OpenAI), 3 runs per case at temperature 0.3, and scored the same metrics.
 
 ```bash
 python scripts/bench_llm.py
 ```
 
 ```
-LLM baseline (llama-3.3-70b-versatile) vs Brok
+======================================================================
+METRIC                         llama-3.3-70b        gpt-4o-mini               Brok
+======================================================================
 
-  bottleneck accuracy   LLM  67%    Brok 100%
-  capacity within 2x    LLM  33%    Brok 100%
-  capacity variance     LLM  CV=0.32 (32% spread across runs)   Brok CV=0.00
-  anti-pattern recall   LLM  80% avg, inconsistent              Brok 100%, deterministic
-  WRITE_TO_CDN recall   LLM  0%     Brok 100%
-  source citation       LLM  phrases, not URLs                  Brok actual benchmark papers
+CAPACITY
+  bottleneck accuracy                    67%                67%               100%
+  capacity within 2x                     67%                 0%               100%
+  estimate variance (CV)                0.24               0.24               0.00
+
+STRUCTURAL ANTI-PATTERN RECALL
+  WRITE_TO_CDN                           0/3                0/3                3/3
+  CONNECTION_POOL_RISK                   3/3                3/3                3/3
+  NO_LOAD_BALANCER                       3/3                3/3                3/3
+  UNPROTECTED_DB                         3/3                3/3                3/3
+  DATA_VOLUME_WALL                       3/3                3/3                3/3
+
+  overall recall                         80%                80%               100%
+======================================================================
 ```
 
-The sharpest finding is case 2: an architecture where a cache absorbs reads and makes the **app tier** the real bottleneck, not the database. The LLM blamed the database all three runs. Brok computed the load distribution and got it right.
+Three findings worth unpacking.
 
-The capacity number variance is the other one worth noting. The same design gave the LLM estimates of 200k, 200k, 350k users across three runs — a 75% spread. Brok returns the same number every time because it is doing arithmetic, not sampling a distribution.
+**Bottleneck accuracy.** Both models got the same case wrong every time: the design where a cache absorbs reads and makes the app tier the wall before the database. Every run, both models blamed the database. Brok distributes the load across the cache hit rate and identifies the correct bottleneck. This is the specific non-obvious result a deterministic engine exists to catch.
 
-WRITE_TO_CDN was the only anti-pattern the LLM missed entirely across all runs. The four obvious structural issues (no load balancer, unprotected DB, connection pool risk, data volume wall) it caught consistently. Subtle is where the gap shows.
+**Capacity within 2x.** GPT-4o-mini was off by more than 2x on every single capacity estimate across all three cases. Llama was within 2x on two of three. Brok is within 2x on all three because it is doing arithmetic against cited ceilings, not sampling a distribution.
 
-Two honest caveats. First, temperature 0.3 makes the LLM more stable than default production use — real variance would be higher. Second, the LLM's citation rate looks high because we counted any string in the `sources` field; the actual values were phrases like "disk I/O throughput", not URLs to benchmarks.
+**Variance.** Both models returned CV=0.24, meaning the same design produced estimates that varied 24% across runs. Brok returns CV=0.00. Same input, same output, every time.
+
+**WRITE_TO_CDN** was the one structural issue neither model flagged across any run. The four obvious issues (no load balancer, unprotected DB, connection pool risk, data volume wall) both models caught consistently. Subtle is where the gap shows.
+
+One honest caveat: temperature 0.3 makes both models more stable than default production use. Real variance would be higher.
 
 ---
 
