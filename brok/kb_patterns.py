@@ -74,7 +74,7 @@ PATTERN_KB: list[PatternEntry] = [
     ),
     PatternEntry(
         name="Saga",
-        aliases=["saga pattern", "distributed saga", "choreography saga", "orchestration saga"],
+        aliases=["saga pattern", "distributed saga", "choreography saga", "orchestration saga", "2pc alternative", "two-phase commit alternative", "distributed transaction coordinator", "saga vs 2pc"],
         when_to_use=(
             "distributed transactions spanning multiple services where two-phase commit "
             "is not viable; long-running business processes; microservices data consistency"
@@ -97,7 +97,7 @@ PATTERN_KB: list[PatternEntry] = [
     ),
     PatternEntry(
         name="Outbox Pattern",
-        aliases=["transactional outbox", "outbox", "inbox outbox pattern"],
+        aliases=["transactional outbox", "outbox", "inbox outbox pattern", "distributed transaction event", "reliable event publishing", "microservices messaging"],
         when_to_use=(
             "reliable event publishing alongside a database write; "
             "prevents dual-write failure: writing to DB and publishing to a queue "
@@ -145,7 +145,7 @@ PATTERN_KB: list[PatternEntry] = [
     ),
     PatternEntry(
         name="Bulkhead",
-        aliases=["bulkhead pattern", "bulkhead isolation", "thread pool isolation", "resource isolation"],
+        aliases=["bulkhead pattern", "bulkhead isolation", "thread pool isolation", "resource isolation", "failure isolation", "service decoupling", "resilience pattern"],
         when_to_use=(
             "isolate resource pools (thread pools, connection pools) per tenant or "
             "downstream service to prevent one failing consumer from exhausting shared resources"
@@ -168,7 +168,7 @@ PATTERN_KB: list[PatternEntry] = [
     ),
     PatternEntry(
         name="Strangler Fig",
-        aliases=["strangler fig pattern", "strangler pattern", "incremental migration", "legacy migration"],
+        aliases=["strangler fig pattern", "strangler pattern", "incremental migration", "legacy migration", "monolith to microservices", "monolith decomposition", "legacy modernization"],
         when_to_use=(
             "incrementally migrate a legacy monolith to a new architecture without "
             "a big-bang rewrite; routes traffic to new and old systems simultaneously"

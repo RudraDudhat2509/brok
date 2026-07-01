@@ -28,7 +28,7 @@ class StrategyEntry:
 STRATEGY_KB: list[StrategyEntry] = [
     StrategyEntry(
         name="consistent hashing",
-        aliases=["ketama", "ring hashing", "consistent hash ring", "virtual nodes"],
+        aliases=["ketama", "ring hashing", "consistent hash ring", "virtual nodes", "database sharding strategy", "shard distribution", "postgres sharding"],
         applies_to=["cache", "relational_db", "queue"],
         when_to_use=(
             "distribute data across nodes where node count changes frequently; "
@@ -251,7 +251,7 @@ STRATEGY_KB: list[StrategyEntry] = [
     ),
     StrategyEntry(
         name="exactly-once delivery",
-        aliases=["exactly once", "eos", "exactly-once semantics", "idempotent delivery"],
+        aliases=["exactly once", "eos", "exactly-once semantics", "idempotent delivery", "kafka exactly once", "no duplicate messages", "deduplication delivery"],
         applies_to=["queue"],
         when_to_use=(
             "financial transactions, inventory updates, any operation where "

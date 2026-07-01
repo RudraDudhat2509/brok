@@ -31,7 +31,7 @@ class TechEntry:
 TECH_KB: list[TechEntry] = [
     TechEntry(
         name="Kafka",
-        aliases=["apache kafka", "confluent kafka", "kafka broker", "kafka cluster"],
+        aliases=["apache kafka", "confluent kafka", "kafka broker", "kafka cluster", "spiky traffic queue", "burst traffic", "event streaming"],
         category=ComponentType.QUEUE,
         hosted=False,
         when_to_pick=(
@@ -54,7 +54,7 @@ TECH_KB: list[TechEntry] = [
     ),
     TechEntry(
         name="Pub/Sub",
-        aliases=["google pub/sub", "google cloud pub/sub", "gcp pubsub", "cloud pubsub"],
+        aliases=["google pub/sub", "google cloud pub/sub", "gcp pubsub", "cloud pubsub", "push notifications", "push delivery queue", "managed message bus"],
         category=ComponentType.QUEUE,
         hosted=True,
         when_to_pick=(
@@ -78,7 +78,7 @@ TECH_KB: list[TechEntry] = [
     ),
     TechEntry(
         name="SQS",
-        aliases=["amazon sqs", "aws sqs", "simple queue service"],
+        aliases=["amazon sqs", "aws sqs", "simple queue service", "spiky traffic queue", "burst queue", "aws managed queue"],
         category=ComponentType.QUEUE,
         hosted=True,
         when_to_pick=(
@@ -154,7 +154,7 @@ TECH_KB: list[TechEntry] = [
 
     TechEntry(
         name="Redis",
-        aliases=["redis cache", "elasticache redis", "redis cluster", "redis sentinel"],
+        aliases=["redis cache", "elasticache redis", "redis cluster", "redis sentinel", "read-heavy cache", "cache strategy", "in-memory cache"],
         category=ComponentType.CACHE,
         hosted=False,
         when_to_pick=(
@@ -456,7 +456,7 @@ TECH_KB: list[TechEntry] = [
     ),
     TechEntry(
         name="CloudFront",
-        aliases=["aws cloudfront", "cloudfront"],
+        aliases=["aws cloudfront", "cloudfront", "static asset cdn", "static file delivery", "aws cdn"],
         category=ComponentType.CDN,
         hosted=True,
         when_to_pick=(
