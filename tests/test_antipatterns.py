@@ -95,6 +95,56 @@ def test_render_antipatterns_shows_in_roast():
     assert "NO_LOAD_BALANCER" in result["roast_text"]
     assert result["antipatterns"]
 
+# --- CONNECTION_POOL_RISK ---
+
+def test_three_app_servers_db_flagged():
+    graph = DesignGraph(components=[
+        Component(name="api-1", type=ComponentType.APP_SERVER),
+        Component(name="api-2", type=ComponentType.APP_SERVER),
+        Component(name="api-3", type=ComponentType.APP_SERVER),
+        Component(name="db", type=ComponentType.RELATIONAL_DB),
+    ])
+    codes = [a.code for a in lint(graph, DEFAULT_NFRS)]
+    assert "CONNECTION_POOL_RISK" in codes
+
+def test_two_app_servers_db_not_flagged():
+    graph = DesignGraph(components=[
+        Component(name="api-1", type=ComponentType.APP_SERVER),
+        Component(name="api-2", type=ComponentType.APP_SERVER),
+        Component(name="db", type=ComponentType.RELATIONAL_DB),
+    ])
+    codes = [a.code for a in lint(graph, DEFAULT_NFRS)]
+    assert "CONNECTION_POOL_RISK" not in codes
+
+def test_three_app_servers_no_db_not_flagged():
+    graph = DesignGraph(components=[
+        Component(name="api-1", type=ComponentType.APP_SERVER),
+        Component(name="api-2", type=ComponentType.APP_SERVER),
+        Component(name="api-3", type=ComponentType.APP_SERVER),
+        Component(name="cache", type=ComponentType.CACHE),
+    ])
+    codes = [a.code for a in lint(graph, DEFAULT_NFRS)]
+    assert "CONNECTION_POOL_RISK" not in codes
+
+
+# --- DATA_VOLUME_WALL ---
+
+def test_high_dau_db_no_object_store_flagged():
+    graph = _graph(ComponentType.APP_SERVER, ComponentType.RELATIONAL_DB)
+    codes = [a.code for a in lint(graph, _nfrs(dau=5_000_000))]
+    assert "DATA_VOLUME_WALL" in codes
+
+def test_high_dau_db_with_object_store_ok():
+    graph = _graph(ComponentType.APP_SERVER, ComponentType.RELATIONAL_DB, ComponentType.OBJECT_STORE)
+    codes = [a.code for a in lint(graph, _nfrs(dau=5_000_000))]
+    assert "DATA_VOLUME_WALL" not in codes
+
+def test_low_dau_db_no_object_store_ok():
+    graph = _graph(ComponentType.APP_SERVER, ComponentType.RELATIONAL_DB)
+    codes = [a.code for a in lint(graph, _nfrs(dau=1_000_000))]
+    assert "DATA_VOLUME_WALL" not in codes
+
+
 def test_clean_design_no_structural_issues():
     from brok.pipeline import review_from_components
     result = review_from_components(

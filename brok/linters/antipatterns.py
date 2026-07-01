@@ -50,4 +50,30 @@ def lint(graph: DesignGraph, nfrs: NFRs) -> list[AntiPattern]:
             ),
         ))
 
+    if ComponentType.RELATIONAL_DB in types and app_count >= 3:
+        found.append(AntiPattern(
+            code="CONNECTION_POOL_RISK",
+            message=(
+                f"{app_count} app servers sharing one Postgres. "
+                "Default max_connections is 100; at 20-30 connections per server "
+                f"you are already at {app_count * 25} connections. "
+                "Throughput looks fine, connections are the real wall. "
+                "Add PgBouncer in transaction mode in front."
+            ),
+        ))
+
+    if (
+        ComponentType.RELATIONAL_DB in types
+        and ComponentType.OBJECT_STORE not in types
+        and nfrs.dau >= 5_000_000
+    ):
+        found.append(AntiPattern(
+            code="DATA_VOLUME_WALL",
+            message=(
+                f"{nfrs.dau:,} DAU on one relational DB with no object store. "
+                "Data volume becomes the wall before writes do at this scale. "
+                "Offload blobs to object storage and plan for horizontal sharding."
+            ),
+        ))
+
     return found
