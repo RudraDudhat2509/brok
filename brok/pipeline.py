@@ -5,7 +5,8 @@ from brok.models import Component, ComponentType, DesignGraph
 from brok.nfr import resolve_nfrs
 from brok.parsers.compose import parse_compose
 from brok.report import render_report
-from brok.voice import render_cost, render_roast
+from brok.linters.antipatterns import lint
+from brok.voice import render_antipatterns, render_cost, render_roast
 from brok.tradeoffs import tradeoffs_for
 from brok.lenses.cost import estimate_cost
 
@@ -34,12 +35,14 @@ def build_result(graph: DesignGraph, traffic: dict | None = None) -> dict:
     confidence = "low" if assumptions else "high"
     report = analyze_capacity(graph, resolved, assumptions, confidence)
     cost = estimate_cost(graph, resolved)
+    antipatterns = lint(graph, resolved)
     return {
         **report.model_dump(mode="json"),
         "report_text": render_report(report),
-        "roast_text": render_roast(report) + render_cost(cost),
+        "roast_text": render_roast(report) + render_antipatterns(antipatterns) + render_cost(cost),
         "tradeoffs": tradeoffs_for(report),
         "cost": cost,
+        "antipatterns": [{"code": a.code, "message": a.message} for a in antipatterns],
     }
 
 
@@ -58,6 +61,7 @@ def _empty_result() -> dict:
         "roast_text": _NO_COMPONENTS_TEXT,
         "tradeoffs": [],
         "cost": None,
+        "antipatterns": [],
     }
 
 

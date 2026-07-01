@@ -200,11 +200,10 @@ A companion Claude Code skill ships in [`skill/SKILL.md`](skill/SKILL.md): it te
 
 ## Roadmap
 
-Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), and a rough cost lens (compute plus egress).
+Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), a rough cost lens (compute plus egress), and a structural anti-pattern linter (three deterministic rules: write-to-CDN, multiple app servers without a load balancer, and a read-heavy database with no cache in front).
 
 Ahead:
 
-- **Anti pattern linter.** Structural checks for single points of failure, dual writes, write to CDN, and hot partitions (the failure mode behind the Discord case above).
 - **Connection and data-volume limits.** The throughput model does not yet see connection-pool exhaustion or data-volume walls, which is where many real databases actually die.
 
 ---

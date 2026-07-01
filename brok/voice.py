@@ -144,6 +144,15 @@ def render_roast(report: CapacityReport) -> str:
     return "\n".join(lines)
 
 
+def render_antipatterns(antipatterns: list) -> str:
+    if not antipatterns:
+        return ""
+    lines = ["", "", "STRUCTURAL ISSUES:"]
+    for ap in antipatterns:
+        lines.append(f"  [{ap.code}] {ap.message}")
+    return "\n".join(lines)
+
+
 def render_cost(cost: dict | None) -> str:
     if not cost:
         return ""
