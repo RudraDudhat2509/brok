@@ -3,6 +3,7 @@ from __future__ import annotations
 from mcp.server.fastmcp import FastMCP
 
 from brok.pipeline import build_traffic, review_from_components, review_from_compose
+from brok.query import search
 
 mcp = FastMCP("brok")
 
@@ -59,6 +60,36 @@ def review_components(
     traffic = build_traffic(expected_dau, requests_per_user_per_day,
                             read_write_ratio, payload_kb, peak_factor)
     return review_from_components(components, traffic)
+
+
+@mcp.tool()
+def query_tradeoffs(question: str) -> dict:
+    """Call this BEFORE choosing between technologies or architectural patterns.
+
+    Works for: datastores, queues, caches, CDNs, load balancers, sharding strategies,
+    cache eviction policies, delivery guarantees, and architectural patterns
+    (CQRS, Saga, Circuit Breaker, Event Sourcing, etc.).
+
+    Ask in natural language:
+      "kafka vs pubsub for spiky writes"
+      "should I use consistent hashing or range sharding"
+      "when does CQRS make sense"
+      "redis or memcached for session data"
+      "how to avoid hot partitions in Kafka"
+      "is Cassandra good for strong consistency"   <- returns: no, here is why
+
+    Returns matched KB entries with cited trade-offs, a head-to-head comparison
+    when two technologies from the same category match, and a note that Brok
+    surfaces the trade-offs but you decide.
+
+    Return shape:
+      matches    — list of {name, type, category, when_to_pick, when_not_to_pick,
+                             key_tradeoff, extra, citation}
+      comparison — head-to-head string when two same-category tech entries match,
+                   None otherwise
+      note       — "Brok surfaces trade-offs. You decide."
+    """
+    return search(question)
 
 
 def main() -> None:
