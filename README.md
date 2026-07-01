@@ -200,12 +200,13 @@ A companion Claude Code skill ships in [`skill/SKILL.md`](skill/SKILL.md): it te
 
 ## Roadmap
 
-Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), and a rough cost lens (compute plus egress).
+Built and benchmarked today: the capacity engine and the golden set benchmark, a usable MCP surface, the curated trade-off knowledge layer, the Brok roast voice (a deterministic narrator that phrases the findings in Brok's dry register, see [docs/brok-voice.md](docs/brok-voice.md), while the numbers stay computed by the engine), a queueing-aware latency signal (the knee), a rough cost lens (compute plus egress), and a structural anti-pattern linter (five deterministic rules: write-to-CDN, multiple app servers without a load balancer, read-heavy database with no cache, connection pool exhaustion risk, and data volume wall at scale).
+
+The connection pool and data volume rules catch the failure modes throughput math misses entirely. Postgres dies at 100 connections (default) before it dies at 1,000 writes per second; 5M+ DAU on a single relational DB accumulates data volume that requires sharding for storage long before throughput is the issue.
 
 Ahead:
 
-- **Anti pattern linter.** Structural checks for single points of failure, dual writes, write to CDN, and hot partitions (the failure mode behind the Discord case above).
-- **Connection and data-volume limits.** The throughput model does not yet see connection-pool exhaustion or data-volume walls, which is where many real databases actually die.
+- **Hot partition detection.** A single-partition queue or a sharding key with low cardinality becomes a hot partition under write skew. Detectable from component types and write ratio.
 
 ---
 
