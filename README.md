@@ -12,7 +12,7 @@ Named after Brok, the blunt dwarf smith of Norse myth (and Sindri's gruffer, fun
 
 Most people, and increasingly most AI coding assistants, design systems without knowing the limits of what they drew. A single Postgres for everything. A CDN in front of writes. Six sequential cross region calls. Nobody finds out the design dies at 12,000 users until it actually does.
 
-The obvious AI approach, "ask the model if my architecture is good," produces confident, generic, ungrounded advice. Frontier models are mediocre at system design and small local models are worse. So the naive build is a wrapper that returns plausible sounding nonsense.
+The obvious AI approach, "ask the model if my architecture is good," produces confident, generic, ungrounded advice without any citations. Frontier models are mediocre at system design and small local models are worse. So the naive build is a wrapper that returns plausible sounding nonsense.
 
 Brok takes the opposite approach: **the model never reasons about systems. Deterministic code does, using real, cited numbers.**
 
