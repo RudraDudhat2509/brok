@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import FastMCP
 
+from brok.assumptions import api as assumptions_api
 from brok.pipeline import build_traffic, review_from_components, review_from_compose
 from brok.query import search
 
@@ -90,6 +91,97 @@ def query_tradeoffs(question: str) -> dict:
       note       — "Brok surfaces trade-offs. You decide."
     """
     return search(question)
+
+
+@mcp.tool()
+def check_assumptions(
+    name: str,
+    kind: str = "datastore",
+    declared: dict | None = None,
+    inferred: dict | None = None,
+    n: float | None = None,
+    w: float | None = None,
+    r: float | None = None,
+) -> dict:
+    """Call this when a design makes consistency, availability, or delivery claims,
+    to check whether those claims can all be true at once.
+
+    Catches things like: claiming strong consistency AND staying available during a
+    network partition (CAP theorem); claiming strong consistency on replicas AND low
+    latency (PACELC); claiming exactly-once processing over an at-least-once queue with
+    a non-idempotent handler; claiming fresh reads with a quorum config that cannot
+    deliver them.
+
+    Pass what you know and nothing else. An undeclared predicate stays UNKNOWN and is
+    never assumed False, so a partial fact set gives a partial answer rather than a
+    wrong one.
+
+      name      — what you are checking, e.g. "orders_db"
+      kind      — "datastore", "service", or "channel"
+      declared  — {predicate: bool} for facts the user stated outright
+      inferred  — {predicate: {"value": bool, "confidence": 0.0-1.0, "evidence": str}}
+                  for facts you guessed from code. Confidence propagates: a conclusion
+                  is never more certain than its weakest input.
+      n, w, r   — replica count and write/read quorum sizes, for quorum arithmetic
+
+    Call list_assumption_predicates first if you are unsure of the vocabulary; any
+    predicate outside it comes back in "unknown_predicates" rather than being guessed at.
+
+    Returns: contradiction_count, contradictions (each with the rule, the citation, the
+    conflicting facts, a confidence, and all_declared so you can tell a hard conflict
+    from one resting on a guess), every known fact with its provenance, and
+    unknown_predicates.
+    """
+    return assumptions_api.check_design_assumptions(
+        name=name, kind=kind, declared=declared, inferred=inferred, n=n, w=w, r=r
+    )
+
+
+@mcp.tool()
+def ask_assumption(
+    predicate: str,
+    name: str,
+    kind: str = "datastore",
+    declared: dict | None = None,
+    inferred: dict | None = None,
+    n: float | None = None,
+    w: float | None = None,
+    r: float | None = None,
+) -> dict:
+    """Ask whether one specific property holds for a design, with the reasoning shown.
+
+    Returns "true", "false", or "unknown" — where unknown genuinely means the facts do
+    not settle it, not that the answer is no. A predicate caught in a contradiction also
+    answers unknown rather than picking a side.
+
+    Same entity arguments as check_assumptions. Use this when you need one answer and
+    the derivation behind it; use check_assumptions when you want every problem found.
+
+    Returns: truth, confidence, source (declared / inferred / derived), the citation
+    chain, the step-by-step derivation, and a rendered explanation suitable for showing
+    the user directly.
+    """
+    return assumptions_api.ask_assumption(
+        predicate=predicate,
+        name=name,
+        kind=kind,
+        declared=declared,
+        inferred=inferred,
+        n=n,
+        w=w,
+        r=r,
+    )
+
+
+@mcp.tool()
+def list_assumption_predicates() -> dict:
+    """The predicate vocabulary check_assumptions and ask_assumption understand.
+
+    Call this before the other two if you are unsure what to pass. Returns every
+    predicate with a plain description, the four domains covered (CAP, PACELC, quorum,
+    idempotency), and the numeric attributes used for quorum arithmetic.
+    """
+    return assumptions_api.list_assumption_predicates()
 
 
 def main() -> None:
