@@ -1,0 +1,29 @@
+app+db no cache                exp=(db,576000.0) got=(db,576000) bn=True within2x=True
+app+db+cache rw10              exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+lb+app+db+cache                exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+app+db+cache rw2               exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+write-heavy rw0.25 cache       exp=(db,720000.0) got=(db,720000) bn=True within2x=True
+no cache rpd20 peak2           exp=(db,2160000.0) got=(db,2160000) bn=True within2x=True
+lb+db only                     exp=(db,216000.0) got=(db,216000) bn=True within2x=True
+cache+app no db                exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+app only                       exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+cache only rw4                 exp=(c,72000000.0) got=(c,72000000) bn=True within2x=True
+queue+app+db                   exp=(db,576000.0) got=(db,576000) bn=True within2x=True
+cdn+obj+app+db+cache rw20      exp=(app,3456000.0) got=(app,3456000) bn=True within2x=True
+two app + db rpd30 peak2       exp=(db,1440000.0) got=(db,1440000) bn=True within2x=True
+unknown ignored                exp=(db,576000.0) got=(db,576000) bn=True within2x=True
+all unknown abstain            exp=(None,None) got=(None,None) bn=True within2x=True
+object store only abstain      exp=(None,None) got=(None,None) bn=True within2x=True
+lb+app+db rpd200 peak2         exp=(db,216000.0) got=(db,216000) bn=True within2x=True
+read-heavy rw100 cache         exp=(app,1152000.0) got=(app,1152000) bn=True within2x=True
+write-heavy rw0.1 cache        exp=(db,633600.0) got=(db,633600) bn=True within2x=True
+lb+app+db+cache rw0.5          exp=(db,864000.0) got=(db,864000) bn=True within2x=True
+spiky peak10 no cache          exp=(db,172800.0) got=(db,172800) bn=True within2x=True
+
+bottleneck accuracy 21/21
+within 2x (capacity cases, n=19) 19/19
+off by >=100x 0/19
+abstain correct 2/2
+max |pred/exp-1| 0.000000
+review_from_components ms p50=0.187 p95=0.267 (n=500)
+deterministic (20 designs x 10 runs byte-identical): True

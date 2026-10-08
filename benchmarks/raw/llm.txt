@@ -1,0 +1,256 @@
+0 app+db no cache None None
+0 app+db+cache rw10 None None
+0 lb+app+db+cache db 288000
+0 app+db+cache rw2 None None
+0 write-heavy rw0.25 cache None None
+0 no cache rpd20 peak2 None None
+0 lb+db only null None
+0 cache+app no db None None
+0 app only None None
+0 cache only rw4 None None
+0 queue+app+db None None
+0 cdn+obj+app+db+cache rw20 None None
+0 two app + db rpd30 peak2 None None
+0 unknown ignored None None
+0 all unknown abstain None None
+0 object store only abstain None None
+0 lb+app+db rpd200 peak2 None None
+0 read-heavy rw100 cache app 1152000
+0 write-heavy rw0.1 cache None None
+0 lb+app+db+cache rw0.5 null None
+0 spiky peak10 no cache None None
+1 app+db no cache None None
+1 app+db+cache rw10 relational_db 288000
+1 lb+app+db+cache app 115300
+1 app+db+cache rw2 None None
+1 write-heavy rw0.25 cache None None
+1 no cache rpd20 peak2 None None
+1 lb+db only None None
+1 cache+app no db app_server 576000
+1 app only None None
+1 cache only rw4 None None
+1 queue+app+db None None
+1 cdn+obj+app+db+cache rw20 None None
+1 two app + db rpd30 peak2 None None
+1 unknown ignored None None
+1 all unknown abstain None None
+1 object store only abstain None None
+1 lb+app+db rpd200 peak2 relational_db 119000
+1 read-heavy rw100 cache app 1152000
+1 write-heavy rw0.1 cache null None
+1 lb+app+db+cache rw0.5 relational_db 384000
+1 spiky peak10 no cache None None
+2 app+db no cache None None
+2 app+db+cache rw10 relational_db 288000
+2 lb+app+db+cache app_server 1152000
+2 app+db+cache rw2 None None
+2 write-heavy rw0.25 cache None None
+2 no cache rpd20 peak2 None None
+2 lb+db only None None
+2 cache+app no db None None
+2 app only None None
+2 cache only rw4 None None
+2 queue+app+db None None
+2 cdn+obj+app+db+cache rw20 None None
+2 two app + db rpd30 peak2 None None
+2 unknown ignored None None
+2 all unknown abstain None None
+2 object store only abstain None None
+2 lb+app+db rpd200 peak2 None None
+2 read-heavy rw100 cache app 1152000
+2 write-heavy rw0.1 cache db 576000
+2 lb+app+db+cache rw0.5 relational_db 384000
+2 spiky peak10 no cache None None
+groq gpt-oss-120b T=0.0: bottleneck acc per run ['14%', '19%', '19%'] mean 17.5% | within2x per run ['5%', '16%', '16%'] mean 12.3% | off>=100x per run [17, 13, 14] | cases whose DAU answer changed across 3 runs: 6/21 | api errors 0
+0 app+db no cache None None
+0 app+db+cache rw10 None None
+0 lb+app+db+cache db 1152000
+0 app+db+cache rw2 None None
+0 write-heavy rw0.25 cache relational_db 2880000
+0 no cache rpd20 peak2 None None
+0 lb+db only None None
+0 cache+app no db None None
+0 app only None None
+0 cache only rw4 None None
+0 queue+app+db None None
+0 cdn+obj+app+db+cache rw20 app 3456000
+0 two app + db rpd30 peak2 None None
+0 unknown ignored None None
+0 all unknown abstain None None
+0 object store only abstain None None
+0 lb+app+db rpd200 peak2 db 43200
+0 read-heavy rw100 cache db 57000
+0 write-heavy rw0.1 cache None None
+0 lb+app+db+cache rw0.5 relational_db 1152000
+0 spiky peak10 no cache null None
+1 app+db no cache None None
+1 app+db+cache rw10 cache 115200
+1 lb+app+db+cache relational_db 1152000
+1 app+db+cache rw2 relational_db 288000
+1 write-heavy rw0.25 cache None None
+1 no cache rpd20 peak2 None None
+1 lb+db only None None
+1 cache+app no db None None
+1 app only None None
+1 cache only rw4 None None
+1 queue+app+db relational_db 104700
+1 cdn+obj+app+db+cache rw20 app 3456000
+1 two app + db rpd30 peak2 None None
+1 unknown ignored None None
+1 all unknown abstain None None
+1 object store only abstain None None
+1 lb+app+db rpd200 peak2 db 98300
+1 read-heavy rw100 cache None None
+1 write-heavy rw0.1 cache None None
+1 lb+app+db+cache rw0.5 relational_db 8648000
+1 spiky peak10 no cache None None
+2 app+db no cache None None
+2 app+db+cache rw10 None None
+2 lb+app+db+cache None None
+2 app+db+cache rw2 db None
+2 write-heavy rw0.25 cache None None
+2 no cache rpd20 peak2 relational_db 1800000
+2 lb+db only db None
+2 cache+app no db None None
+2 app only None None
+2 cache only rw4 None None
+2 queue+app+db null None
+2 cdn+obj+app+db+cache rw20 app 144000
+2 two app + db rpd30 peak2 None None
+2 unknown ignored app 2878000
+2 all unknown abstain y 1152000
+2 object store only abstain null None
+2 lb+app+db rpd200 peak2 None None
+2 read-heavy rw100 cache db 28538
+2 write-heavy rw0.1 cache None None
+2 lb+app+db+cache rw0.5 null None
+2 spiky peak10 no cache None None
+groq gpt-oss-120b T=0.7: bottleneck acc per run ['19%', '19%', '14%'] mean 17.5% | within2x per run ['16%', '11%', '5%'] mean 10.5% | off>=100x per run [13, 12, 15] | cases whose DAU answer changed across 3 runs: 12/21 | api errors 0
+0 app+db no cache db 2000
+0 app+db+cache rw10 db 2000
+0 lb+app+db+cache db 2000
+0 app+db+cache rw2 db 2000
+0 write-heavy rw0.25 cache db 2000
+0 no cache rpd20 peak2 db 2000
+0 lb+db only db 2000
+0 cache+app no db app 2000
+0 app only app 2000
+0 cache only rw4 c 1200
+0 queue+app+db db 2000
+0 cdn+obj+app+db+cache rw20 db 2000
+0 two app + db rpd30 peak2 db 2000
+0 unknown ignored db 2000
+0 all unknown abstain x 2000
+0 object store only abstain s3 1200
+0 lb+app+db rpd200 peak2 db 400
+0 read-heavy rw100 cache db 2000
+0 write-heavy rw0.1 cache db 2000
+0 lb+app+db+cache rw0.5 db 2000
+0 spiky peak10 no cache db 2000
+1 app+db no cache db 2000
+1 app+db+cache rw10 db 2000
+1 lb+app+db+cache db 2000
+1 app+db+cache rw2 db 2000
+1 write-heavy rw0.25 cache db 2000
+1 no cache rpd20 peak2 db 2000
+1 lb+db only db 2000
+1 cache+app no db app 2000
+1 app only app 2000
+1 cache only rw4 c 1200
+1 queue+app+db db 2000
+1 cdn+obj+app+db+cache rw20 db 2000
+1 two app + db rpd30 peak2 db 2000
+1 unknown ignored db 2000
+1 all unknown abstain x 2000
+1 object store only abstain s3 1200
+1 lb+app+db rpd200 peak2 db 1000
+1 read-heavy rw100 cache db 2000
+1 write-heavy rw0.1 cache db 2000
+1 lb+app+db+cache rw0.5 db 2000
+1 spiky peak10 no cache db 2000
+2 app+db no cache db 2000
+2 app+db+cache rw10 db 2000
+2 lb+app+db+cache db 2000
+2 app+db+cache rw2 db 2000
+2 write-heavy rw0.25 cache db 2000
+2 no cache rpd20 peak2 db 2000
+2 lb+db only db 2000
+2 cache+app no db app 2000
+2 app only app 2000
+2 cache only rw4 c 1200
+2 queue+app+db db 2000
+2 cdn+obj+app+db+cache rw20 db 2000
+2 two app + db rpd30 peak2 db 2000
+2 unknown ignored db 2000
+2 all unknown abstain x 2000
+2 object store only abstain s3 1200
+2 lb+app+db rpd200 peak2 db 1000
+2 read-heavy rw100 cache db 2000
+2 write-heavy rw0.1 cache db 2000
+2 lb+app+db+cache rw0.5 db 2000
+2 spiky peak10 no cache db 2000
+openai gpt-4o-mini T=0.0: bottleneck acc per run ['67%', '67%', '67%'] mean 66.7% | within2x per run ['0%', '0%', '0%'] mean 0.0% | off>=100x per run [18, 18, 18] | cases whose DAU answer changed across 3 runs: 1/21 | api errors 0
+0 app+db no cache db 2000
+0 app+db+cache rw10 db 1200
+0 lb+app+db+cache db 2000
+0 app+db+cache rw2 db 2000
+0 write-heavy rw0.25 cache db 6000
+0 no cache rpd20 peak2 db 2000
+0 lb+db only db 2000
+0 cache+app no db app 2000
+0 app only app 2000
+0 cache only rw4 c 4000
+0 queue+app+db db 600
+0 cdn+obj+app+db+cache rw20 db 20000
+0 two app + db rpd30 peak2 db 2000
+0 unknown ignored db 2000
+0 all unknown abstain x 2000
+0 object store only abstain s3 1200
+0 lb+app+db rpd200 peak2 db 2000
+0 read-heavy rw100 cache db 4000
+0 write-heavy rw0.1 cache db 2000
+0 lb+app+db+cache rw0.5 db 2000
+0 spiky peak10 no cache db 2000
+1 app+db no cache db 2000
+1 app+db+cache rw10 db 2000
+1 lb+app+db+cache db 2000
+1 app+db+cache rw2 db 4000
+1 write-heavy rw0.25 cache db 4000
+1 no cache rpd20 peak2 db 1000
+1 lb+db only db 500
+1 cache+app no db app 2000
+1 app only app_server 2000
+1 cache only rw4 c 2000
+1 queue+app+db db 2000
+1 cdn+obj+app+db+cache rw20 db 2000
+1 two app + db rpd30 peak2 db 2000
+1 unknown ignored db 6000
+1 all unknown abstain x 2000
+1 object store only abstain s3 10000
+1 lb+app+db rpd200 peak2 db 2000
+1 read-heavy rw100 cache db 2000
+1 write-heavy rw0.1 cache db 2000
+1 lb+app+db+cache rw0.5 db 2000
+1 spiky peak10 no cache db 2000
+2 app+db no cache db 2000
+2 app+db+cache rw10 db 400
+2 lb+app+db+cache db 2000
+2 app+db+cache rw2 db 2000
+2 write-heavy rw0.25 cache db 6000
+2 no cache rpd20 peak2 db 4000
+2 lb+db only db 5000
+2 cache+app no db app 2000
+2 app only app 2000
+2 cache only rw4 c 1200
+2 queue+app+db db 400
+2 cdn+obj+app+db+cache rw20 db 2000
+2 two app + db rpd30 peak2 db 1000
+2 unknown ignored db 1000
+2 all unknown abstain x 8000
+2 object store only abstain s3 1200
+2 lb+app+db rpd200 peak2 db 500
+2 read-heavy rw100 cache db 6000
+2 write-heavy rw0.1 cache db 2000
+2 lb+app+db+cache rw0.5 db 4000
+2 spiky peak10 no cache db 2000
+openai gpt-4o-mini T=0.7: bottleneck acc per run ['67%', '62%', '67%'] mean 65.1% | within2x per run ['0%', '0%', '0%'] mean 0.0% | off>=100x per run [18, 17, 17] | cases whose DAU answer changed across 3 runs: 15/21 | api errors 0

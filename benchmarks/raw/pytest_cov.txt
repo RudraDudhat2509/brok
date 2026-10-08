@@ -1,0 +1,40 @@
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.12.7-final-0 _______________
+
+Name                           Stmts   Miss  Cover
+--------------------------------------------------
+brok\__init__.py                   0      0   100%
+brok\assumptions\__init__.py       4      0   100%
+brok\assumptions\api.py           30      0   100%
+brok\assumptions\engine.py       115      3    97%
+brok\assumptions\entities.py      25      0   100%
+brok\assumptions\models.py        74      3    96%
+brok\assumptions\rules.py         43      4    91%
+brok\benchmark\__init__.py         0      0   100%
+brok\benchmark\golden.py          26      0   100%
+brok\benchmark\runner.py          33      0   100%
+brok\benchmark\scorer.py          40      1    98%
+brok\kb.py                        12      0   100%
+brok\kb_patterns.py               12      0   100%
+brok\kb_strategies.py             12      0   100%
+brok\kb_tech.py                   15      0   100%
+brok\lenses\__init__.py            0      0   100%
+brok\lenses\capacity.py           41      0   100%
+brok\lenses\cost.py               19      0   100%
+brok\lenses\latency.py             6      0   100%
+brok\linters\__init__.py           0      0   100%
+brok\linters\antipatterns.py      22      0   100%
+brok\models.py                    38      0   100%
+brok\nfr.py                       13      0   100%
+brok\parsers\__init__.py           0      0   100%
+brok\parsers\compose.py           31      3    90%
+brok\pipeline.py                  46      0   100%
+brok\query.py                     51      0   100%
+brok\report.py                    30      0   100%
+brok\server.py                    30      2    93%
+brok\tradeoffs.py                 24      0   100%
+brok\voice.py                     86      1    99%
+--------------------------------------------------
+TOTAL                            878     17    98%
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
