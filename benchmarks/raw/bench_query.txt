@@ -1,0 +1,66 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading KB and model (first run downloads ~90 MB)...
+
+GOLDEN RETRIEVAL SET========================================
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 2010.74it/s]
+[1mBertModel LOAD REPORT[0m from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.[0m
+  kafka vs pubsub                             recall=1.00  OK
+  kafka vs sqs                                recall=1.00  OK
+  redis vs memcached session                  recall=1.00  OK
+  postgres vs cockroachdb global              recall=1.00  OK
+  s3 vs gcs object storage                    recall=1.00  OK
+  cloudflare vs cloudfront cdn                recall=1.00  OK
+  nginx vs alb load balancer                  recall=1.00  OK
+  rabbitmq vs kafka ordering                  recall=1.00  OK
+  how to shard postgres                       recall=0.50  MISS(consistent hashing)
+  cache eviction session data                 recall=1.00  OK
+  write through vs write back                 recall=1.00  OK
+  hot partition kafka                         recall=1.00  OK
+  at least once exactly once                  recall=1.00  OK
+  read replicas async replication             recall=1.00  OK
+  range vs hash sharding                      recall=1.00  OK
+  when to use cqrs                            recall=1.00  OK
+  distributed transaction saga                recall=1.00  OK
+  circuit breaker pattern                     recall=1.00  OK
+  event sourcing vs crud                      recall=1.00  OK
+  strangler fig migration                     recall=1.00  OK
+  rate limiting token bucket                  recall=1.00  OK
+  bulkhead pattern isolation                  recall=1.00  OK
+  spiky writes queue                          recall=0.50  MISS(Kafka)
+  read heavy cache strategy                   recall=0.50  MISS(Redis)
+  global distributed database                 recall=1.00  OK
+  static asset delivery cdn                   recall=1.00  OK
+  monolith to microservices                   recall=1.00  OK
+  decoupled services resilience               recall=0.50  MISS(Bulkhead)
+  blob storage large files                    recall=1.00  OK
+  push notification queue managed             recall=1.00  OK
+
+  Overall recall@3: 93.3%  (target >= 85%)  PASS
+
+HALLUCINATION GUARD SET=====================================
+  cassandra strong consistency                PASS  found 'eventual' in Cassandra
+  redis terabyte storage                      PASS  found 'ram' in Redis
+  pubsub strict per key ordering              PASS  found 'ordering' in Pub/Sub
+  use cqrs for simple crud app                PASS  found 'simple' in CQRS
+  2pc distributed transaction scale           PASS  found 'two-phase' in Saga
+  mysql horizontal write scale                PASS  found 'vertical' in MySQL
+  memcached persistent storage                PASS  found 'no persistence' in Memcached
+  event sourcing simple app                   PASS  found 'simple' in Event Sourcing
+  kafka push delivery managed                 PASS  found 'self-hosted' in Kafka
+  cockroachdb single region low latency       PASS  found 'cross-region' in CockroachDB
+
+  Guard pass rate: 10/10  (target 100%)  PASS
+
+============================================================
+  Golden recall: 93.3%  PASS
+  Guard:         10/10  PASS
+============================================================
+
+Both gates pass. KB is ready to ship.
+exit 0

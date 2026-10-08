@@ -1,0 +1,16 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 6511.72it/s]
+[1mBertModel LOAD REPORT[0m from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.[0m
+golden (n=30): recall@1 0.550  recall@3 0.933  recall@5 0.983  MRR 0.928
+paraphrase/typo (n=20): recall@1 0.575  recall@3 0.825  recall@5 0.875  MRR 0.796
+hallucination guard: 10/10
+  MISS my table is too big for one machine, how do i split it up | missing ['consistent hashing', 'hash-based sharding'] | got []
+  MISS which keys should i throw out first when my cache fills up | missing ['LRU', 'TTL'] | got ['write-through', 'Memcached', 'Fastly']
+  MISS update the cache and database in the same request or later | missing ['write-back'] | got ['write-through', 'Memcached', 'Fastly']
+  MISS serve images and javascript bundles close to users | missing ['Cloudflare', 'CloudFront'] | got []
+search() ms p50=17.9 p95=22.9 (n=300, model warm)

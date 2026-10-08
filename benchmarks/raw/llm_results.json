@@ -1,0 +1,2530 @@
+{
+ "groq gpt-oss-120b T=0.0": [
+  {
+   "run": 0,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 288000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+db only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "all unknown abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "read-heavy rw100 cache",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.1 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 288000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 115300,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+db only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 576000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "all unknown abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 119000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "read-heavy rw100 cache",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.1 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 384000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 288000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+db only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "all unknown abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "read-heavy rw100 cache",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 576000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 384000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  }
+ ],
+ "groq gpt-oss-120b T=0.7": [
+  {
+   "run": 0,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2880000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+db only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 3456000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "all unknown abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 43200,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 57000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.1 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 115200,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 1152000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 288000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+db only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 104700,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": 3456000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "all unknown abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 98300,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.1 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 8648000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.25 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "no cache rpd20 peak2",
+   "bn": false,
+   "w2": true,
+   "x100": false,
+   "d": 1800000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache+app no db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache only rw4",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "queue+app+db",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 144000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "two app + db rpd30 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "unknown ignored",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2878000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1152000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "object store only abstain",
+   "bn": true,
+   "w2": true,
+   "x100": false,
+   "d": null,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 28538,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.1 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "spiky peak10 no cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": null,
+   "exp": 172800.0,
+   "err": null
+  }
+ ],
+ "openai gpt-4o-mini T=0.0": [
+  {
+   "run": 0,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1200,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1200,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 400,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1200,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1200,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1200,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1200,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  }
+ ],
+ "openai gpt-4o-mini T=0.7": [
+  {
+   "run": 0,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 1200,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 6000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "app only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 600,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 20000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1200,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 0,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 500,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "app only",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 6000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 10000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 1,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db no cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw10",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 400,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app+db+cache rw2",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.25 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 6000,
+   "exp": 720000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "no cache rpd20 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 2160000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+db only",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 5000,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache+app no db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "app only",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cache only rw4",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1200,
+   "exp": 72000000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "queue+app+db",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 400,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "cdn+obj+app+db+cache rw20",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 3456000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "two app + db rpd30 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1000,
+   "exp": 1440000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "unknown ignored",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 1000,
+   "exp": 576000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "all unknown abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 8000,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "object store only abstain",
+   "bn": false,
+   "w2": false,
+   "x100": false,
+   "d": 1200,
+   "exp": null,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db rpd200 peak2",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 500,
+   "exp": 216000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "read-heavy rw100 cache",
+   "bn": false,
+   "w2": false,
+   "x100": true,
+   "d": 6000,
+   "exp": 1152000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "write-heavy rw0.1 cache",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 2000,
+   "exp": 633600.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "lb+app+db+cache rw0.5",
+   "bn": true,
+   "w2": false,
+   "x100": true,
+   "d": 4000,
+   "exp": 864000.0,
+   "err": null
+  },
+  {
+   "run": 2,
+   "case": "spiky peak10 no cache",
+   "bn": true,
+   "w2": false,
+   "x100": false,
+   "d": 2000,
+   "exp": 172800.0,
+   "err": null
+  }
+ ]
+}

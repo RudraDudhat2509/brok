@@ -115,6 +115,8 @@ What that does and does not mean matters, so here is the honest framing. The ben
 
 So the claim is precise: **Brok is internally consistent with its cited numbers, behaves correctly, and is honest about what it cannot see.** It is not a claim that it predicts every real world scaling wall.
 
+Expanded check (2026-10-08, [BENCHMARKS.md](BENCHMARKS.md)): 21 hand-derived architectures, expected answers written before running. Brok got 21/21 bottlenecks and 19/19 capacities within 2x, with byte-identical output across 10 runs of 20 designs. On the same cases gpt-4o-mini scored 67% on bottleneck and 0% within 2x. Retrieval generalizes less well than the golden set suggests: 82.5% recall@3 on 20 paraphrased and misspelled queries, against 93.3% on the original 30. Brok matches its own cited ceilings exactly, so the 21/21 shows the engine follows its spec, not that the ceilings predict a real system.
+
 ---
 
 ## LLM baseline comparison
@@ -323,6 +325,7 @@ Brok is deliberately the opposite of a confident guess. The intelligence lives i
 pip install -e ".[dev]"
 pytest -q          # the full deterministic test suite
 python scripts/bench.py   # the capacity benchmark scorecard
+bash demo.sh             # 5-step walkthrough (run it from Git Bash on Windows)
 ```
 
 Everything runs with no API key and no network.

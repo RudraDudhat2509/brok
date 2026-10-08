@@ -1,0 +1,16 @@
+Brok benchmark scorecard
+
+  bottleneck accuracy : 100%
+  capacity within 2x  : 100%
+  off by 100x         : 0
+  citeability         : 100%
+  overload accuracy   : 100%
+
+  [scored] single-postgres-no-cache-write-wall: bottleneck=True within2x=True overload_ok=True cited=True
+  [scored] app-tier-is-the-wall-with-cache: bottleneck=True within2x=True overload_ok=True cited=True
+  [scored] write-heavy-db-wall-even-with-cache: bottleneck=True within2x=True overload_ok=True cited=True
+  [scored] abstain-on-unknown-only: bottleneck=True within2x=None overload_ok=True cited=True
+  [documented] tiny-hobby-app-fits: bottleneck=None within2x=None overload_ok=True cited=True
+  [documented] instagram-2011-volume-bound: bottleneck=None within2x=None overload_ok=False cited=True
+  [documented] discord-message-store-hot-partition: bottleneck=None within2x=None overload_ok=False cited=True
+exit 0
